@@ -1,0 +1,134 @@
+@import '../../../assets/stylesheets/index.scss';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+
+  &__icons_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 100%;
+    transition: all 1s ease;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $color-black;
+  }
+
+  &__icon {
+    margin: 0 0.4rem 0.1rem;
+    padding: 0;
+    height: 1.5rem;
+  }
+
+  &__title_wrapper {
+    flex-shrink: 0;
+    transition: all 1s ease;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    background: linear-gradient(to right, $color-blue-button 0%, $color-blue-title-end 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 1s ease;
+  }
+
+  &__button_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 100%;
+    transition: all 1s ease;
+  }
+
+  &__button {
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $color-white;
+    background-color: $color-blue-button;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 2.5rem;
+    text-align: center;
+    box-shadow: 0.3rem 0.3rem 1rem 0 rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      cursor: pointer;
+      color: $color-blue-button;
+      background-color: $color-white;
+      box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+      transition: all 0.5s ease;
+    }
+
+    &:not(:hover) {
+      transition: all 0.5s ease;
+    }
+    &:active {
+      transform: translateY(4px);
+    }
+  }
+}
+
+@media (min-width: 551px) and (max-width: 768px) {
+  .header {
+    margin-top: 1rem;
+    &__title {
+      font-size: 2.2rem;
+      letter-spacing: 0.2rem;
+      transition: all 1s ease;
+    }
+  }
+}
+
+@media (min-width: 480px) and (max-width: 550px) {
+  .header {
+    &__title {
+      font-size: 2rem;
+      letter-spacing: 0.1rem;
+    }
+    &__button {
+      width: 5.3rem;
+      height: 1.9rem;
+      line-height: 1.9rem;
+      font-size: 0.6rem;
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .header {
+    &__title {
+      font-size: 1.5rem;
+      letter-spacing: 0.1rem;
+    }
+    &__button {
+      width: 4rem;
+      height: 1.6rem;
+      line-height: 1.6rem;
+      font-size: 0.5rem;
+    }
+    &__icon {
+      display: none;
+      margin: 0 0.1rem 0.1rem;
+    }
+  }
+}

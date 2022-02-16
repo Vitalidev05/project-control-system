@@ -1,0 +1,69 @@
+@import '../../../assets/stylesheets/index.scss';
+
+.search {
+  &__wrapper {
+    position: relative;
+    caret-color: transparent;
+    margin-right: 0.2rem;
+    z-index: 1;
+  }
+  &__input {
+    width: 10rem;
+    height: 2.5rem;
+    padding: 0.1rem 0 0.1rem 3rem;
+    margin-right: 0.1rem;
+    border: none;
+    border-radius: 2rem;
+    outline: none;
+    box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    caret-color: $color-black;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+    padding: 0;
+    height: 1.5rem;
+  }
+}
+
+@media (min-width: 551px) and (max-width: 768px) {
+  .search {
+    &__wrapper {
+      width: 6rem;
+      height: 1.9rem;
+    }
+    &__input {
+      width: 100%;
+      height: 2.2rem;
+      font-size: 0.7rem;
+      padding: 0 0 0 2.5rem;
+    }
+    &__icon {
+      left: 0.2rem;
+      top: 0.2rem;
+      height: 1rem;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .search {
+    &__wrapper {
+      width: 5.5rem;
+      height: 1.7rem;
+    }
+    &__input {
+      width: 100%;
+      height: 1.7rem;
+      font-size: 0.7rem;
+      padding: 0 0 0 2.5rem;
+    }
+    &__icon {
+      left: 0.2rem;
+      top: 0.2rem;
+      height: 1rem;
+    }
+  }
+}
