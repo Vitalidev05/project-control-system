@@ -3,12 +3,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import { Authorization } from '../pages/Authorization';
 import { ProjectContainer } from '../components/containers/ProjectContainer';
-import { BoardList } from '../components/blocks/BoardList';
+import { BoardList } from '../components/blocks/boardBlocks/BoardList';
 import { IBoardList } from '../constants';
-import { Board } from '../components/controls/Board';
+import { Board } from '../components/blocks/boardBlocks/Board';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducers/rootReducer';
 
 export const AppRouter = () => {
-  const board: IBoardList[] = [];
+  const board: IBoardList[] = useSelector(
+    (state: RootState) => state.boardList?.boardList
+  );
+
   return (
     <Router>
       <Routes>
@@ -23,7 +28,7 @@ export const AppRouter = () => {
               {' '}
               <ProjectContainer />
               <Routes>
-                <Route path="/boardList" element={<BoardList boards={[]} />} />
+                <Route path="/boardList" element={<BoardList />} />
                 {board.map((value) => (
                   <Route
                     key={value.boardId}

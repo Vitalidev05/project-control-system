@@ -5,14 +5,15 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import {
   ColumnContainer,
   ColumnTitle
-} from '../../../assets/stylesheets/styles';
+} from '../../../../assets/stylesheets/styles';
 import { AddNewItem } from '../AddNewItem';
 import { ColumnTask } from '../ColumnTask';
-import { DragItem } from '../../../context/DragItem';
-import '../../icons/BaseIcon/BaseIcon.scss';
-import { CrossIcon } from '../../icons';
-import { IBoardList, IColumns } from '../../../constants';
-import { isHidden } from '../../../utils/isHidden';
+import { DragItem } from '../../../../context/DragItem';
+import '../../../icons/BaseIcon/BaseIcon.scss';
+import { CrossIcon } from '../../../icons';
+import { IBoardList, IColumns } from '../../../../constants';
+import { isHidden } from '../../../../utils/isHidden';
+import { useColumn } from './hook';
 
 interface ColumnProps {
   boardId: string;
@@ -33,38 +34,19 @@ interface HoverDrag {
 }
 
 export const BoardColumn = (props: ColumnProps) => {
-  const board1: IBoardList[] = []; // todo
+  const {
+    board,
+    onDeleteColumn,
+    onMoveColumn,
+    onMoveTask,
+    onSetDraggedItem,
+    isDisable
+  } = useColumn();
 
-  const isDisable = false; // todo
-
-  const onDeleteColumn: (...props: any) => void = () => {
-    return;
-  };
-  const onSetToggle = () => {
-    return; // todo
-  };
-  const onSetDraggedItem: (...props: any) => void = () => {
-    return; // todo
-  };
-
-  const onMoveColumn: (...props: any) => void = () => {
-    return;
-  };
-
-  const onMoveTask: (
-    dragIndex: number,
-    hoverIndex: number,
-    sourceColumn: string,
-    targetColumn: string,
-    boardId: string
-  ) => void = () => {
-    return;
-  }; // todo
-
-  const board: IBoardList = board1.filter(
+  const boardList: IBoardList = board.filter(
     (x: IBoardList) => x.boardId === props.boardId
   )[0];
-  const targetBoardColumn: IColumns = board.boardColumns[props.index];
+  const targetBoardColumn: IColumns = boardList.boardColumns[props.index];
   const ref = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
     accept: ['COLUMN', 'CARD'],
@@ -112,13 +94,13 @@ export const BoardColumn = (props: ColumnProps) => {
     columnName: props.columnName
   };
 
-  const [, drag, preview] = useDrag(() => ({
+  const [, drag, preview] = useDrag({
     item,
     canDrag: !isDisable,
-    type: '',
+    // type: 'column',
     begin: () => onSetDraggedItem(props.boardId, item),
     end: () => onSetDraggedItem(props.boardId, undefined)
-  }));
+  });
   useEffect(() => {
     preview(getEmptyImage());
   }, [preview]);
@@ -134,7 +116,7 @@ export const BoardColumn = (props: ColumnProps) => {
       ref={ref}
       isHidden={isHidden(
         props.isPreview,
-        board.draggedItem,
+        boardList.draggedItem,
         'COLUMN',
         props.columnId
       )}

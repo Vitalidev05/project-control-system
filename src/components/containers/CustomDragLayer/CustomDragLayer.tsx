@@ -2,8 +2,8 @@ import React from 'react';
 import { XYCoord, useDragLayer } from 'react-dnd';
 
 import { CustomDragLayerContainer } from '../../../assets/stylesheets/styles';
-import { BoardColumn as Column } from '../../controls/Column';
-import { ColumnTask as Card } from '../../controls/ColumnTask';
+import { BoardColumn as Column } from '../../blocks/boardBlocks/Column';
+import { ColumnTask as Card } from '../../blocks/boardBlocks/ColumnTask';
 import { DragItem } from '../../../context/DragItem';
 
 function getItemStyles(currentOffset: XYCoord | null) {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import '../../icons/BaseIcon/BaseIcon.scss';
-import { CrossIcon } from '../../icons';
-import { IBoardList, cardColors } from '../../../constants';
+import '../../../icons/BaseIcon/BaseIcon.scss';
+import { CrossIcon } from '../../../icons';
+import { cardColors } from '../../../../constants';
 
 import {
   StyledBoardList,
@@ -13,22 +13,13 @@ import {
   CrossIconWrapper,
   CardBgColors
 } from './BoardList.styled';
+import { useBoardList } from './hook';
 
-interface StateProps {
-  boards: IBoardList[];
-}
+export const BoardList = () => {
+  const { onAddBoard, onDeleteBoard, boards } = useBoardList();
 
-export const BoardList = (props: StateProps) => {
   const [boardName, setBoardName] = useState('');
   const [boardColor, setBoardColor] = useState('');
-
-  const onAddBoard: (...props: any) => void = () => {
-    return;
-  }; //todo
-
-  const onDeleteBoard: (...props: any) => void = () => {
-    return;
-  }; //todo
 
   const changeName = (event: React.FormEvent<HTMLInputElement>) => {
     setBoardName(event.currentTarget.value);
@@ -45,7 +36,7 @@ export const BoardList = (props: StateProps) => {
 
   return (
     <StyledBoardList>
-      {props.boards?.map((value) => (
+      {boards?.map((value) => (
         <BlockWrapper key={value.boardId} className={value.boardColor}>
           <CrossIconWrapper>
             <CrossIcon

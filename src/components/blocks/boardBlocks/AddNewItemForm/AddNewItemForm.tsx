@@ -4,8 +4,8 @@ import {
   NewItemFormContainer,
   NewItemButton,
   NewItemInput
-} from '../../../assets/stylesheets/styles';
-import useFocus from '../../../utils/useFocus';
+} from '../../../../assets/stylesheets/styles';
+import useFocus from '../../../../utils/useFocus';
 
 interface NewItemFormProps {
   onAdd(text: string): void;

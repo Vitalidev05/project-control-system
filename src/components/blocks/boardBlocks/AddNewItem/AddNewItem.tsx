@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import { AddItemButton } from '../../../assets/stylesheets/styles';
+import { AddItemButton } from '../../../../assets/stylesheets/styles';
 import { AddNewItemForm } from '../AddNewItemForm';
+import { useAddNewItem } from './hook';
 
 interface AddNewItemProps {
   functionName: string;
@@ -14,20 +15,10 @@ interface AddNewItemProps {
 type Props = AddNewItemProps;
 
 export const AddNewItem = (props: Props) => {
+  const { onAddColumn, onAddTask } = useAddNewItem();
+
   const [showForm, setShowForm] = useState(false);
   const { functionName, toggleButtonText, dark } = props;
-
-  const onAddColumn: (text: string, id: string) => void = () => {
-    return;
-  }; // todo
-
-  const onAddTask: (
-    text: string,
-    id: string,
-    columnId: string
-  ) => void = () => {
-    return;
-  }; // todo
 
   if (showForm) {
     return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import './TaskMenu.scss';
+import { useTaskMenu } from './hook';
 
 interface CardMenuProps {
   taskDate?: Date;
@@ -13,24 +14,13 @@ interface CardMenuProps {
 }
 
 export const TaskMenu: React.FC<CardMenuProps> = (props: CardMenuProps) => {
-  const [text, setText] = useState(props.taskText);
+  const { onChangeText, onSetToggle, onDeleteCard } = useTaskMenu();
 
-  const onDeleteCard: (...props: any) => void = () => {
-    return;
-  };
-  const closePopup: (...props: any) => void = () => {
-    return;
-  };
-  const onSetToggle: (...props: any) => void = () => {
-    return;
-  };
-  const onChangeText: (...props: any) => void = () => {
-    return;
-  };
+  const [text, setText] = useState(props.taskText);
 
   const deleteCardFunc = () => {
     onDeleteCard(props.taskId, props.boardId, props.columnId);
-    closePopup();
+    props.closePopup();
     onSetToggle();
   };
 
@@ -40,7 +30,7 @@ export const TaskMenu: React.FC<CardMenuProps> = (props: CardMenuProps) => {
 
   const closePopupFunc = () => {
     onChangeText(props.taskId, props.boardId, props.columnId, text);
-    closePopup();
+    props.closePopup();
     onSetToggle();
   };
 
