@@ -12,11 +12,11 @@ export const selectBoard = (selectBoardId: string) => {
   return createSelector(selectBoardList, (state) => {
     return state.find(({ boardId }) => boardId === selectBoardId);
   });
-};
+}; // todo memoize
 
 export const selectBoardColumns = (selectBoardId: string) => {
   return createSelector(
     selectBoard(selectBoardId),
     (state) => state?.boardColumns || []
   );
-};
+}; // todo memoize

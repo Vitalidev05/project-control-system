@@ -4,37 +4,27 @@ import { Route, Routes } from 'react-router';
 import { Authorization } from '../pages/Authorization';
 import { ProjectContainer } from '../components/controls/ProjectContainer';
 import { BoardList } from '../pages/BoardList';
-import { IBoardList } from '../constants';
 import { Board } from '../pages/Board';
-import { useSelector } from 'react-redux';
-import { selectBoardList } from '../store/reducers/boardList/selectors';
+
+import { RouteConst } from './routeConst';
 
 export const AppRouter = () => {
-  const board: IBoardList[] = useSelector(selectBoardList);
-
   return (
-    // todo
     <Router>
       <Routes>
         <Route
-          path="/authorization"
+          path={RouteConst.AUTH}
           element={<Authorization isAuth={false} />}
         />
         <Route
-          path="*"
+          path={RouteConst.HOME}
           element={
             <>
               {' '}
               <ProjectContainer />
               <Routes>
-                <Route path="/boardList" element={<BoardList />} />
-                {board.map((value) => (
-                  <Route
-                    key={value.boardId}
-                    path={`/board_${value.boardId}`}
-                    element={<Board boardID={value.boardId} />}
-                  />
-                ))}
+                <Route path={RouteConst.BOARD_LIST} element={<BoardList />} />
+                <Route path={RouteConst.BOARD} element={<Board />} />
               </Routes>
             </>
           }

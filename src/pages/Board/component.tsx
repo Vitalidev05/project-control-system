@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { AppContainer } from '../../assets/stylesheets/styles';
 import { AddNewItem } from '../../components/blocks/boardBlocks/AddNewItem';
@@ -6,9 +6,13 @@ import { BoardColumn as Column } from '../../components/blocks/boardBlocks/Colum
 import { CustomDragLayer } from '../../components/controls/CustomDragLayer';
 import { IColumns } from '../../constants';
 import { useBoard } from './hook';
-import { BoardProps } from './types';
+import { useParams } from 'react-router-dom';
 
-export const Board = memo(({ boardID }: BoardProps) => {
+export const Board = memo(() => {
+  const params = useParams();
+  const boardID = useMemo(() => {
+    return params?.id || 'id';
+  }, [params]);
   const { columns } = useBoard(boardID);
 
   return (

@@ -14,6 +14,7 @@ import {
   CardBgColors
 } from './BoardList.styled';
 import { useBoardList } from './hook';
+import { RouteConst } from '../../router/routeConst';
 
 export const BoardList = memo(() => {
   const {
@@ -35,7 +36,10 @@ export const BoardList = memo(() => {
               onClick={() => deleteBoardFunc(value.boardId)}
             />
           </CrossIconWrapper>
-          <Link key={value.boardId} to={`/board_${value.boardId}`}>
+          <Link
+            key={value.boardId}
+            to={`${RouteConst.BOARD_LIST}/${value.boardId}`}
+          >
             {value.boardName}
           </Link>
         </BlockWrapper>
