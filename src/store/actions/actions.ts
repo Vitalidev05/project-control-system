@@ -31,8 +31,16 @@ import {
   SET_AUTH_FALSE,
   SET_DISABLE_FALSE,
   SET_DISABLE_TRUE,
-  TOGGLE_DISABLE
+  TOGGLE_DISABLE,
+  SET_CURRENT_BOARD
 } from './actionTypes';
+
+function setCurrentBoard(str: string | null) {
+  return {
+    type: SET_CURRENT_BOARD,
+    payload: str
+  };
+}
 
 function add() {
   return {
@@ -188,5 +196,6 @@ export {
   setAuthFalse,
   setDisableTrue,
   setDisableFalse,
-  toggleDisable
+  toggleDisable,
+  setCurrentBoard
 };

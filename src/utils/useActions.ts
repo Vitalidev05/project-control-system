@@ -9,6 +9,7 @@ import {
   deleteTask,
   moveColumn,
   moveTask,
+  setCurrentBoard,
   setDraggeditem,
   toggleDisable
 } from '../store/actions/actions';
@@ -17,6 +18,11 @@ import { useCallback } from 'react';
 
 export const useActions = () => {
   const dispatch = useDispatch();
+
+  const setCurrentBoardId: (currentBoard: string | null) => void = useCallback(
+    (currentBoard) => dispatch(setCurrentBoard(currentBoard)),
+    [dispatch]
+  );
 
   const onAddColumn: (str: string, boardId: string) => void = useCallback(
     (str, boardId) => dispatch(addColumn({ text: str, boardId })),
@@ -116,6 +122,7 @@ export const useActions = () => {
     onDeleteCard,
     onChangeText,
     onAddBoard,
-    onDeleteBoard
+    onDeleteBoard,
+    setCurrentBoardId
   };
 };

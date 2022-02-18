@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useActions } from '../../../../utils/useActions';
 
 import { HookProps } from './types';
@@ -14,21 +14,24 @@ export const useTaskMenu = ({
 
   const [text, setText] = useState(taskText);
 
-  const deleteCardFunc = () => {
+  const deleteCardFunc = useCallback(() => {
     onDeleteCard(taskId, boardId, columnId);
     closePopup();
     onSetToggle();
-  };
+  }, [boardId, closePopup, columnId, onDeleteCard, onSetToggle, taskId]);
 
-  const changeTextFunc = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.currentTarget.value);
-  };
+  const changeTextFunc = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setText(event.currentTarget.value);
+    },
+    []
+  );
 
-  const closePopupFunc = () => {
+  const closePopupFunc = useCallback(() => {
     onChangeText(taskId, boardId, columnId, text);
     closePopup();
     onSetToggle();
-  };
+  }, [boardId, closePopup, columnId, onChangeText, onSetToggle, taskId, text]);
 
   return {
     changeTextFunc,

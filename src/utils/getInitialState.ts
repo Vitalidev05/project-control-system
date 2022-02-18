@@ -4,12 +4,13 @@ import { IBoardList } from '../constants';
 
 interface InitialState {
   boardList: IBoardList[];
-  currentBoardId?: string;
+  currentBoardId: string | null;
 }
 
 const getInitialState = (name = 'Board'): InitialState => {
   const date = new Date();
   return {
+    currentBoardId: null,
     boardList: [
       {
         boardId: nanoid(),

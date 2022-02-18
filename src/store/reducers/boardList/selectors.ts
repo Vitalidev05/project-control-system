@@ -8,16 +8,25 @@ export const selectBoardList = createSelector(
   (state) => state?.boardList
 );
 
-export const selectBoard = (selectBoardId: string) => {
-  console.log('select board');
-  return createSelector(selectBoardList, (state) => {
-    return state.find(({ boardId }) => boardId === selectBoardId);
-  });
-}; // todo memoize
+export const selectCurrentBoardId = createSelector(
+  getBoardList,
+  (state) => state.currentBoardId
+);
 
-export const selectBoardColumns = (selectBoardId: string) => {
-  return createSelector(
-    selectBoard(selectBoardId),
-    (state) => state?.boardColumns || []
-  );
-}; // todo memoize
+export const selectBoard = createSelector(
+  selectBoardList,
+  selectCurrentBoardId,
+  (state, currentBoardId) => {
+    return state.find(({ boardId }) => boardId === currentBoardId);
+  }
+);
+
+export const selectBoardColumns = createSelector(
+  selectBoard,
+  (state) => state?.boardColumns || []
+);
+
+export const selectDraggedItem = createSelector(
+  selectBoard,
+  (state) => state?.draggedItem
+);

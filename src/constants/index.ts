@@ -13,7 +13,8 @@ import {
   SET_AUTH_TRUE,
   SET_DISABLE_FALSE,
   SET_DISABLE_TRUE,
-  TOGGLE_DISABLE
+  TOGGLE_DISABLE,
+  SET_CURRENT_BOARD
 } from '../store/actions/actionTypes';
 
 import { DragItem } from '../context/DragItem';
@@ -99,6 +100,10 @@ interface IAddBoard {
 }
 
 type ActionType =
+  | {
+      type: typeof SET_CURRENT_BOARD;
+      payload: string | null;
+    }
   | {
       type: typeof ADD_BOARD;
       payload: { boardName: string; boardColor: string };

@@ -11,7 +11,8 @@ import {
   DELETE_TASK,
   DELETE_COLUMN,
   DELETE_BOARD,
-  CHANGE_TEXT
+  CHANGE_TEXT,
+  SET_CURRENT_BOARD
 } from '../../actions/actionTypes';
 
 import {
@@ -27,6 +28,12 @@ const initialState = getInitialState();
 
 const boardList = (state = initialState, action: ActionType) => {
   switch (action.type) {
+    case SET_CURRENT_BOARD: {
+      return {
+        ...state,
+        currentBoardId: action.payload
+      };
+    }
     case ADD_BOARD:
       return {
         ...state,

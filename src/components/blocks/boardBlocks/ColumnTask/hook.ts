@@ -1,4 +1,3 @@
-import { IBoardList } from '../../../../constants';
 import { useSelector } from 'react-redux';
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
@@ -8,7 +7,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import isHidden from '../../../../utils/isHidden';
 import { HookProps } from './types';
 import { HoverDrag } from '../../../../types/shared';
-import { selectBoard } from '../../../../store/reducers/boardList/selectors';
+import { selectDraggedItem } from '../../../../store/reducers/boardList/selectors';
 import { selectDnd } from '../../../../store/reducers/dissableDnd/selectors';
 
 export const useColumnTask = ({
@@ -19,12 +18,10 @@ export const useColumnTask = ({
   taskName,
   isPreview
 }: HookProps) => {
-  const memoizeSelectBoard = useMemo(() => selectBoard(boardId), [boardId]);
-  const boardList: IBoardList | undefined = useSelector(memoizeSelectBoard);
-
-  const isDisable: boolean = useSelector(selectDnd);
-
   const { onMoveTask, onSetToggle, onSetDraggedItem } = useActions();
+  const draggedItem = useSelector(selectDraggedItem);
+
+  const isDisable = useSelector(selectDnd);
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -32,55 +29,68 @@ export const useColumnTask = ({
     setShowPopup(!showPopup);
   }, [showPopup]);
 
-  function toggle() {
+  const toggle = useCallback(() => {
     togglePopup();
     onSetToggle();
-  }
+  }, [onSetToggle, togglePopup]);
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const [, drop] = useDrop({
-    accept: 'CARD',
-    hover(item: HoverDrag) {
-      const newItem: DragItem | undefined = item.payload.Drag;
+  const dropConfig = useMemo(
+    () => ({
+      accept: 'CARD',
+      hover(item: HoverDrag) {
+        const newItem: DragItem | undefined = item.payload.Drag;
 
-      if (newItem?.type === 'CARD') {
-        if (newItem.cardId !== taskId) {
-          const dragIndex = newItem.cardIndex;
-          const hoverIndex = taskIndex;
-          const sourceColumn = newItem.columnId;
-          const targetColumn = columnId;
+        if (newItem?.type === 'CARD') {
+          if (newItem.cardId !== taskId) {
+            const dragIndex = newItem.cardIndex;
+            const hoverIndex = taskIndex;
+            const sourceColumn = newItem.columnId;
+            const targetColumn = columnId;
 
-          onMoveTask(
-            dragIndex,
-            hoverIndex,
-            sourceColumn,
-            targetColumn,
-            boardId
-          );
-          newItem.cardIndex = hoverIndex;
-          newItem.columnId = targetColumn;
+            onMoveTask(
+              dragIndex,
+              hoverIndex,
+              sourceColumn,
+              targetColumn,
+              boardId
+            );
+            newItem.cardIndex = hoverIndex;
+            newItem.columnId = targetColumn;
+          }
         }
       }
-    }
-  });
+    }),
+    [boardId, columnId, onMoveTask, taskId, taskIndex]
+  );
 
-  const item: DragItem = {
-    boardId: boardId,
-    cardIndex: taskIndex,
-    cardId: taskId,
-    columnId: columnId,
-    taskName: taskName,
-    type: 'CARD'
-  };
+  const [, drop] = useDrop(dropConfig);
 
-  const [, drag, preview] = useDrag({
-    item,
-    canDrag: !isDisable,
-    // type: 'item',
-    begin: () => onSetDraggedItem(boardId, item),
-    end: () => onSetDraggedItem(boardId, undefined)
-  }); // todo
+  const item: DragItem = useMemo(
+    () => ({
+      boardId: boardId,
+      cardIndex: taskIndex,
+      cardId: taskId,
+      columnId: columnId,
+      taskName: taskName,
+      type: 'CARD'
+    }),
+    [boardId, columnId, taskId, taskIndex, taskName]
+  );
+
+  const dragConfig = useMemo(
+    () => ({
+      item,
+      canDrag: !isDisable,
+      // type: 'item',
+      begin: () => onSetDraggedItem(boardId, item),
+      end: () => onSetDraggedItem(boardId, undefined)
+    }),
+    [boardId, isDisable, item, onSetDraggedItem]
+  );
+
+  const [, drag, preview] = useDrag(dragConfig);
 
   useEffect(() => {
     preview(getEmptyImage());
@@ -88,7 +98,10 @@ export const useColumnTask = ({
 
   drag(drop(ref));
 
-  const hide = isHidden(isPreview, boardList?.draggedItem, 'CARD', taskId);
+  const hide = useMemo(
+    () => isHidden(isPreview, draggedItem, 'CARD', taskId),
+    [draggedItem, isPreview, taskId]
+  );
 
   return {
     ref,
