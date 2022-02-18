@@ -7,14 +7,13 @@ import { BoardList } from '../pages/BoardList';
 import { IBoardList } from '../constants';
 import { Board } from '../pages/Board';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store/reducers/rootReducer';
+import { selectBoardList } from '../store/reducers/boardList/selectors';
 
 export const AppRouter = () => {
-  const board: IBoardList[] = useSelector(
-    (state: RootState) => state.boardList?.boardList
-  );
+  const board: IBoardList[] = useSelector(selectBoardList);
 
   return (
+    // todo
     <Router>
       <Routes>
         <Route

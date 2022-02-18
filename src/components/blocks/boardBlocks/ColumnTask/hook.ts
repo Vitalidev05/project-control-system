@@ -1,7 +1,5 @@
 import { IBoardList } from '../../../../constants';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/reducers/rootReducer';
-
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -10,6 +8,8 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import isHidden from '../../../../utils/isHidden';
 import { HookProps } from './types';
 import { HoverDrag } from '../../../../types/shared';
+import { selectBoard } from '../../../../store/reducers/boardList/selectors';
+import { selectDnd } from '../../../../store/reducers/dissableDnd/selectors';
 
 export const useColumnTask = ({
   boardId,
@@ -19,19 +19,11 @@ export const useColumnTask = ({
   taskName,
   isPreview
 }: HookProps) => {
-  const board: IBoardList[] = useSelector(
-    (state: RootState) => state.boardList?.boardList
-  );
+  const boardList: IBoardList | undefined = useSelector(selectBoard(boardId));
 
-  const isDisable: boolean = useSelector(
-    (state: RootState) => state.disableDnd.disable
-  );
+  const isDisable: boolean = useSelector(selectDnd);
 
   const { onMoveTask, onSetToggle, onSetDraggedItem } = useActions();
-
-  const boardList: IBoardList = board.filter(
-    (x: IBoardList) => x.boardId === boardId
-  )[0];
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -95,7 +87,7 @@ export const useColumnTask = ({
 
   drag(drop(ref));
 
-  const hide = isHidden(isPreview, boardList.draggedItem, 'CARD', taskId);
+  const hide = isHidden(isPreview, boardList?.draggedItem, 'CARD', taskId);
 
   return {
     ref,

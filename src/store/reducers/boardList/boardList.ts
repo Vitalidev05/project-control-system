@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import { ActionType } from '../../constants';
+import { ActionType } from '../../../constants';
 import {
   ADD_BOARD,
   ADD_COLUMN,
@@ -12,16 +12,16 @@ import {
   DELETE_COLUMN,
   DELETE_BOARD,
   CHANGE_TEXT
-} from '../actions/actionTypes';
+} from '../../actions/actionTypes';
 
 import {
   overrideItemAtIndex,
   removeItemAtIndex,
   moveItem,
   insertItemAtIndex
-} from '../../utils/arrayUtils';
+} from '../../../utils/arrayUtils';
 
-import { getInitialState, getNewBoard } from '../../utils/getInitialState';
+import { getInitialState, getNewBoard } from '../../../utils/getInitialState';
 
 const initialState = getInitialState();
 
@@ -367,7 +367,6 @@ const boardList = (state = initialState, action: ActionType) => {
         ...state
       };
   }
-  return state;
 };
 
 export default boardList;

@@ -1,6 +1,5 @@
 import { IBoardList, IColumns } from '../../../../constants';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/reducers/rootReducer';
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
 import { useEffect, useRef } from 'react';
@@ -9,6 +8,8 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import { HoverDrag } from '../../../../types/shared';
 import isHidden from '../../../../utils/isHidden';
 import { HookProps } from './types';
+import { selectBoard } from '../../../../store/reducers/boardList/selectors';
+import { selectDnd } from '../../../../store/reducers/dissableDnd/selectors';
 
 export const useColumn = ({
   index,
@@ -20,18 +21,12 @@ export const useColumn = ({
   const { onMoveColumn, onMoveTask, onDeleteColumn, onSetDraggedItem } =
     useActions();
 
-  const board: IBoardList[] = useSelector(
-    (state: RootState) => state.boardList?.boardList
-  );
+  const boardList: IBoardList | undefined = useSelector(selectBoard(boardId));
 
-  const isDisable: boolean = useSelector(
-    (state: RootState) => state.disableDnd.disable
-  );
+  const isDisable: boolean = useSelector(selectDnd);
 
-  const boardList: IBoardList = board.filter(
-    (x: IBoardList) => x.boardId === boardId
-  )[0];
-  const targetBoardColumn: IColumns = boardList.boardColumns[index];
+  const targetBoardColumn: IColumns | undefined =
+    boardList?.boardColumns[index];
   const ref = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
     accept: ['COLUMN', 'CARD'],
@@ -90,7 +85,7 @@ export const useColumn = ({
 
   drag(drop(ref));
 
-  const hide = isHidden(isPreview, boardList.draggedItem, 'COLUMN', columnId);
+  const hide = isHidden(isPreview, boardList?.draggedItem, 'COLUMN', columnId);
 
   return {
     deleteColumnFunc,

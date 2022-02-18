@@ -1,16 +1,9 @@
-import { IBoardList, IColumns } from '../../constants';
+import { IColumns } from '../../constants';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers/rootReducer';
+import { selectBoardColumns } from '../../store/reducers/boardList/selectors';
 
 export const useBoard = (boardID: string) => {
-  const board: IBoardList[] = useSelector(
-    (state: RootState) => state.boardList?.boardList
-  );
-
-  const boardList: IBoardList = board.filter(
-    (x: IBoardList) => x.boardId === boardID
-  )[0];
-  const columns: IColumns[] = boardList.boardColumns;
+  const columns: IColumns[] = useSelector(selectBoardColumns(boardID));
 
   return { columns };
 };

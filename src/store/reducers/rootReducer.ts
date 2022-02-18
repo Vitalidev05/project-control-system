@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import boardList from './boardList';
+import boardList from './boardList/boardList';
 
 import authorization from './authorization';
-import disableDnd from './disable-dnd';
+import disableDnd from './dissableDnd/disable-dnd';
 
 const rootReducer = combineReducers({
   boardList,

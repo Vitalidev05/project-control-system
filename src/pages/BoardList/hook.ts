@@ -1,13 +1,12 @@
 import { IBoardList } from '../../constants';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers/rootReducer';
 import { useActions } from '../../utils/useActions';
 import React, { useState } from 'react';
+import { selectBoardList } from '../../store/reducers/boardList/selectors';
 
 export const useBoardList = () => {
-  const boards: IBoardList[] = useSelector(
-    (state: RootState) => state.boardList?.boardList
-  );
+  const boards: IBoardList[] = useSelector(selectBoardList);
+
   const { onAddBoard, onDeleteBoard } = useActions();
 
   const [boardName, setBoardName] = useState('');

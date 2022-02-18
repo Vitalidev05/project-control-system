@@ -24,14 +24,14 @@ export const BoardColumn = memo(
       <ColumnContainer isPreview={isPreview} ref={ref} isHidden={hide}>
         <CrossIcon className={'size_l'} onClick={deleteColumnFunc} />
         <ColumnTitle>{columnName}</ColumnTitle>
-        {targetBoardColumn.columnTasks.map((task, index) => (
+        {targetBoardColumn?.columnTasks.map((task, index) => (
           <ColumnTask
             taskDate={task.taskDate}
             key={task.taskId}
             taskName={task.taskName}
             taskText={task.taskText}
             taskIndex={index}
-            columnId={targetBoardColumn.columnId}
+            columnId={targetBoardColumn?.columnId}
             taskId={task.taskId}
             boardId={boardId}
           />
