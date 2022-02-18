@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   NewItemFormContainer,
   NewItemButton,
@@ -8,7 +8,7 @@ import { useAddNewItemForm } from './hook';
 
 import { Props } from './types';
 
-export const AddNewItemForm = ({ onAdd }: Props) => {
+export const AddNewItemForm = memo(({ onAdd }: Props) => {
   const { setText, text, handleAddText, inputRef } = useAddNewItemForm({
     onAdd
   });
@@ -24,4 +24,4 @@ export const AddNewItemForm = ({ onAdd }: Props) => {
       <NewItemButton onClick={() => onAdd(text)}>Create</NewItemButton>
     </NewItemFormContainer>
   );
-};
+});

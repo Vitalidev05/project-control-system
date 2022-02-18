@@ -4,7 +4,7 @@ import { RootState } from '../../../../store/reducers/rootReducer';
 
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import isHidden from '../../../../utils/isHidden';
@@ -35,9 +35,9 @@ export const useColumnTask = ({
 
   const [showPopup, setShowPopup] = useState(false);
 
-  function togglePopup() {
+  const togglePopup = useCallback(() => {
     setShowPopup(!showPopup);
-  }
+  }, [showPopup]);
 
   function toggle() {
     togglePopup();

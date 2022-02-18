@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../../components/icons/BaseIcon/BaseIcon.scss';
@@ -15,7 +15,7 @@ import {
 } from './BoardList.styled';
 import { useBoardList } from './hook';
 
-export const BoardList = () => {
+export const BoardList = memo(() => {
   const {
     boards,
     onAddBoardFunc,
@@ -71,4 +71,4 @@ export const BoardList = () => {
       </StyledAddBoardBlock>
     </StyledBoardList>
   );
-};
+});

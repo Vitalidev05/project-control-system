@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { AddItemButton } from '../../../../assets/stylesheets/styles';
 import { AddNewItemForm } from '../AddNewItemForm';
@@ -6,34 +6,22 @@ import { useAddNewItem } from './hook';
 
 import { Props } from './types';
 
-export const AddNewItem = ({
-  functionName,
-  toggleButtonText,
-  dark,
-  boardId,
-  columnId
-}: Props) => {
-  const { onAddColumn, onAddTask, setShowForm, showForm } = useAddNewItem();
+export const AddNewItem = memo(
+  ({ functionName, toggleButtonText, dark, boardId, columnId }: Props) => {
+    const { onAdd, setShowForm, showForm } = useAddNewItem({
+      columnId,
+      boardId,
+      functionName
+    });
 
-  if (showForm) {
+    if (showForm) {
+      return <AddNewItemForm onAdd={onAdd} />;
+    }
+
     return (
-      <AddNewItemForm
-        onAdd={(itemText) => {
-          // eslint-disable-next-line no-lone-blocks, @typescript-eslint/no-unused-expressions
-          {
-            functionName === 'addColumn'
-              ? onAddColumn(itemText, boardId)
-              : onAddTask(itemText, boardId, columnId || '1');
-          }
-          setShowForm(false);
-        }}
-      />
+      <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
+        {toggleButtonText}
+      </AddItemButton>
     );
   }
-
-  return (
-    <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
-      {toggleButtonText}
-    </AddItemButton>
-  );
-};
+);

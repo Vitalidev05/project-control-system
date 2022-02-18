@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { useActions } from '../../../../utils/useActions';
-import React, { useState } from 'react';
+
 import { HookProps } from './types';
 
 export const useTaskMenu = ({

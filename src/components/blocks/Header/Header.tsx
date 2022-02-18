@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Burger } from '../../controls/Burger';
@@ -10,7 +10,7 @@ import { HomeHeaderIcon } from '../../icons';
 
 import useOnClickOutside from './hook';
 
-export const Header = () => {
+export const Header = memo(() => {
   const [open, setOpen] = useState<boolean>(false);
   const node = useRef<HTMLDivElement>(null);
 
@@ -43,4 +43,4 @@ export const Header = () => {
       </div>
     </header>
   );
-};
+});

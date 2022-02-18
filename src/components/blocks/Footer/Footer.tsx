@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './Footer.scss';
 import '../../icons/BaseIcon/BaseIcon.scss';
@@ -10,7 +10,7 @@ import {
   WomanFooterIcon2
 } from '../../icons';
 
-export const Footer = () => (
+export const Footer = memo(() => (
   <footer className={'footer'}>
     <div className={'footer__icons_wrapper'}>
       <div className={'footer__title'}>DevTeam:</div>
@@ -41,4 +41,4 @@ export const Footer = () => (
       </a>
     </div>
   </footer>
-);
+));

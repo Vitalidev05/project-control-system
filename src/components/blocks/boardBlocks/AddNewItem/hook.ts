@@ -1,9 +1,29 @@
 import { useActions } from '../../../../utils/useActions';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
-export const useAddNewItem = () => {
+export const useAddNewItem = ({
+  functionName,
+  columnId,
+  boardId
+}: {
+  functionName: string;
+  boardId: string;
+  columnId?: string;
+}) => {
   const { onAddColumn, onAddTask } = useActions();
 
   const [showForm, setShowForm] = useState(false);
-  return { showForm, onAddTask, onAddColumn, setShowForm };
+  const onAdd = useCallback(
+    (itemText: string) => {
+      {
+        functionName === 'addColumn'
+          ? onAddColumn(itemText, boardId)
+          : onAddTask(itemText, boardId, columnId || '1');
+      }
+      setShowForm(false);
+    },
+    [boardId, columnId, functionName, onAddColumn, onAddTask]
+  );
+
+  return { showForm, setShowForm, onAdd };
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { AppContainer } from '../../assets/stylesheets/styles';
 import { AddNewItem } from '../../components/blocks/boardBlocks/AddNewItem';
@@ -8,7 +8,7 @@ import { IColumns } from '../../constants';
 import { useBoard } from './hook';
 import { BoardProps } from './types';
 
-export const Board = ({ boardID }: BoardProps) => {
+export const Board = memo(({ boardID }: BoardProps) => {
   const { columns } = useBoard(boardID);
 
   return (
@@ -30,4 +30,4 @@ export const Board = ({ boardID }: BoardProps) => {
       />
     </AppContainer>
   );
-};
+});
