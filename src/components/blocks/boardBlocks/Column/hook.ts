@@ -1,16 +1,24 @@
-import { IBoardList } from '../../../../constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { IBoardList, IColumns } from '../../../../constants';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/reducers/rootReducer';
-import {
-  deleteColumn,
-  moveColumn,
-  moveTask,
-  setDraggeditem
-} from '../../../../store/actions/actions';
 import { DragItem } from '../../../../context/DragItem';
+import { useActions } from '../../../../utils/useActions';
+import { useEffect, useRef } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
+import { HoverDrag } from '../../../../types/shared';
+import isHidden from '../../../../utils/isHidden';
+import { HookProps } from './types';
 
-export const useColumn = () => {
-  const dispatch = useDispatch();
+export const useColumn = ({
+  index,
+  boardId,
+  columnId,
+  columnName,
+  isPreview
+}: HookProps) => {
+  const { onMoveColumn, onMoveTask, onDeleteColumn, onSetDraggedItem } =
+    useActions();
 
   const board: IBoardList[] = useSelector(
     (state: RootState) => state.boardList?.boardList
@@ -20,40 +28,74 @@ export const useColumn = () => {
     (state: RootState) => state.disableDnd.disable
   );
 
-  const onDeleteColumn: (boardId: string, columnId: string) => void = (
-    boardId,
-    columnId
-  ) => dispatch(deleteColumn({ boardId, columnId }));
+  const boardList: IBoardList = board.filter(
+    (x: IBoardList) => x.boardId === boardId
+  )[0];
+  const targetBoardColumn: IColumns = boardList.boardColumns[index];
+  const ref = useRef<HTMLDivElement>(null);
+  const [, drop] = useDrop({
+    accept: ['COLUMN', 'CARD'],
+    hover(item: HoverDrag) {
+      const newItem: DragItem | undefined = item.payload.Drag;
+      if (newItem?.type === 'COLUMN') {
+        const dragIndex = newItem.columnIndex;
+        const hoverIndex = index;
 
-  const onSetDraggedItem: (
-    boardId: string,
-    Drag: DragItem | undefined
-  ) => void = (boardId, Drag) => dispatch(setDraggeditem({ boardId, Drag }));
+        if (dragIndex === hoverIndex) {
+          return;
+        }
 
-  const onMoveColumn: (
-    dragIndex: number,
-    hoverIndex: number,
-    boardId: string
-  ) => void = (dragIndex, hoverIndex, boardId) =>
-    dispatch(moveColumn({ dragIndex, hoverIndex, boardId }));
+        onMoveColumn(dragIndex, hoverIndex, newItem.boardId);
+        newItem.columnIndex = hoverIndex;
+      } else if (newItem?.type === 'CARD') {
+        const dragIndex = newItem.cardIndex;
+        const hoverIndex = 0;
+        const sourceColumn = newItem.columnId;
+        const targetColumn = columnId;
 
-  const onMoveTask: (
-    dragIndex: number,
-    hoverIndex: number,
-    sourceColumn: string,
-    targetColumn: string,
-    boardId: string
-  ) => void = (dragIndex, hoverIndex, sourceColumn, targetColumn, boardId) =>
-    dispatch(
-      moveTask({ dragIndex, hoverIndex, sourceColumn, targetColumn, boardId })
-    );
+        if (sourceColumn === targetColumn) {
+          return;
+        }
+
+        onMoveTask(dragIndex, hoverIndex, sourceColumn, targetColumn, boardId);
+
+        newItem.cardIndex = hoverIndex;
+        newItem.columnId = targetColumn;
+      }
+    }
+  });
+
+  const item: DragItem = {
+    type: 'COLUMN',
+    boardId: boardId,
+    columnId: columnId,
+    columnIndex: index,
+    columnName: columnName
+  };
+
+  const [, drag, preview] = useDrag({
+    item,
+    canDrag: !isDisable,
+    // type: 'column',
+    begin: () => onSetDraggedItem(boardId, item),
+    end: () => onSetDraggedItem(boardId, undefined)
+  });
+  useEffect(() => {
+    preview(getEmptyImage());
+  }, [preview]);
+
+  const deleteColumnFunc = () => {
+    onDeleteColumn(boardId, columnId);
+  };
+
+  drag(drop(ref));
+
+  const hide = isHidden(isPreview, boardList.draggedItem, 'COLUMN', columnId);
 
   return {
-    board,
-    isDisable,
-    onDeleteColumn,
-    onSetDraggedItem,
-    onMoveColumn,
-    onMoveTask
+    deleteColumnFunc,
+    targetBoardColumn,
+    ref,
+    hide
   };
 };

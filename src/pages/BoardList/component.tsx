@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import '../../../icons/BaseIcon/BaseIcon.scss';
-import { CrossIcon } from '../../../icons';
-import { cardColors } from '../../../../constants';
+import '../../components/icons/BaseIcon/BaseIcon.scss';
+import { CrossIcon } from '../../components/icons';
+import { cardColors } from '../../constants';
 
 import {
   StyledBoardList,
@@ -16,23 +16,14 @@ import {
 import { useBoardList } from './hook';
 
 export const BoardList = () => {
-  const { onAddBoard, onDeleteBoard, boards } = useBoardList();
-
-  const [boardName, setBoardName] = useState('');
-  const [boardColor, setBoardColor] = useState('');
-
-  const changeName = (event: React.FormEvent<HTMLInputElement>) => {
-    setBoardName(event.currentTarget.value);
-  };
-
-  const onAddBoardFunc = () => {
-    onAddBoard(boardName, boardColor);
-    setBoardName('');
-  };
-
-  const deleteBoardFunc = (boardId: string) => {
-    onDeleteBoard(boardId);
-  };
+  const {
+    boards,
+    onAddBoardFunc,
+    deleteBoardFunc,
+    setBoardColor,
+    changeName,
+    boardName
+  } = useBoardList();
 
   return (
     <StyledBoardList>

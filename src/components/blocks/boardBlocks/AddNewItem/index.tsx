@@ -1,1 +1,1 @@
-export { AddNewItem } from './AddNewItem';
+export { AddNewItem } from './component';

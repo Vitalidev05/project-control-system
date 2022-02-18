@@ -1,1 +1,1 @@
-export { ColumnTask } from './ColumnTask';
+export { ColumnTask } from './component';

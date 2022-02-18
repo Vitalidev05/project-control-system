@@ -43,7 +43,6 @@ export const BlockWrapper = styled.div`
     display: block;
     width: 10rem;
     height: 7rem;
-    color: #000;
     text-decoration: none;
     color: #000;
     font-size: 0.9rem;
@@ -111,7 +110,6 @@ export const StyledBoardInputWrapper = styled.div`
     line-height: 1.5rem;
     color: #fff;
     text-transform: uppercase;
-    background-color: #06cafe;
     background-color: #e5e5e5;
 
     // background-color: #fbfafa;

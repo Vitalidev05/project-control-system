@@ -1,33 +1,37 @@
-import {
-  changeText,
-  deleteTask,
-  toggleDisable
-} from '../../../../store/actions/actions';
-import { useDispatch } from 'react-redux';
+import { useActions } from '../../../../utils/useActions';
+import React, { useState } from 'react';
+import { HookProps } from './types';
 
-export const useTaskMenu = () => {
-  const dispatch = useDispatch();
+export const useTaskMenu = ({
+  taskId,
+  boardId,
+  columnId,
+  taskText,
+  closePopup
+}: HookProps) => {
+  const { onChangeText, onSetToggle, onDeleteCard } = useActions();
 
-  const onDeleteCard: (
-    taskId: string,
-    boardId: string,
-    columnId: string
-  ) => void = (taskId, boardId, columnId) =>
-    dispatch(deleteTask({ taskId, boardId, columnId }));
+  const [text, setText] = useState(taskText);
 
-  const onSetToggle: () => void = () => dispatch(toggleDisable());
+  const deleteCardFunc = () => {
+    onDeleteCard(taskId, boardId, columnId);
+    closePopup();
+    onSetToggle();
+  };
 
-  const onChangeText: (
-    taskId: string,
-    boardId: string,
-    columnId: string,
-    text: string
-  ) => void = (taskId, boardId, columnId, text) =>
-    dispatch(changeText({ taskId, boardId, columnId, text }));
+  const changeTextFunc = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.currentTarget.value);
+  };
+
+  const closePopupFunc = () => {
+    onChangeText(taskId, boardId, columnId, text);
+    closePopup();
+    onSetToggle();
+  };
 
   return {
-    onDeleteCard,
-    onChangeText,
-    onSetToggle
+    changeTextFunc,
+    deleteCardFunc,
+    closePopupFunc
   };
 };

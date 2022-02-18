@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import { Authorization } from '../pages/Authorization';
-import { ProjectContainer } from '../components/containers/ProjectContainer';
-import { BoardList } from '../components/blocks/boardBlocks/BoardList';
+import { ProjectContainer } from '../components/controls/ProjectContainer';
+import { BoardList } from '../pages/BoardList';
 import { IBoardList } from '../constants';
-import { Board } from '../components/blocks/boardBlocks/Board';
+import { Board } from '../pages/Board';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducers/rootReducer';
 

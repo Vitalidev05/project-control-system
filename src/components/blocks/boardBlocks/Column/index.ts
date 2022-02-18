@@ -1,1 +1,1 @@
-export { BoardColumn } from './Column';
+export { BoardColumn } from './component';

@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { AddItemButton } from '../../../../assets/stylesheets/styles';
 import { AddNewItemForm } from '../AddNewItemForm';
 import { useAddNewItem } from './hook';
 
-interface AddNewItemProps {
-  functionName: string;
-  boardId: string;
-  toggleButtonText: string;
-  columnId?: string;
-  dark?: boolean;
-}
+import { Props } from './types';
 
-type Props = AddNewItemProps;
-
-export const AddNewItem = (props: Props) => {
-  const { onAddColumn, onAddTask } = useAddNewItem();
-
-  const [showForm, setShowForm] = useState(false);
-  const { functionName, toggleButtonText, dark } = props;
+export const AddNewItem = ({
+  functionName,
+  toggleButtonText,
+  dark,
+  boardId,
+  columnId
+}: Props) => {
+  const { onAddColumn, onAddTask, setShowForm, showForm } = useAddNewItem();
 
   if (showForm) {
     return (
@@ -27,8 +22,8 @@ export const AddNewItem = (props: Props) => {
           // eslint-disable-next-line no-lone-blocks, @typescript-eslint/no-unused-expressions
           {
             functionName === 'addColumn'
-              ? onAddColumn(itemText, props.boardId)
-              : onAddTask(itemText, props.boardId, props.columnId || '1');
+              ? onAddColumn(itemText, boardId)
+              : onAddTask(itemText, boardId, columnId || '1');
           }
           setShowForm(false);
         }}

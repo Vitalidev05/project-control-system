@@ -1,1 +1,1 @@
-export { TaskMenu } from './TaskMenu';
+export { TaskMenu } from './component';

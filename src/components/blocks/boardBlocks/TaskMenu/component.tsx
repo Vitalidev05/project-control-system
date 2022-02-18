@@ -1,58 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './TaskMenu.scss';
 import { useTaskMenu } from './hook';
+import { CardMenuProps } from './types';
 
-interface CardMenuProps {
-  taskDate?: Date;
-  taskName: string;
-  taskText: string;
-  closePopup: () => void;
-  taskId: string;
-  columnId: string;
-  boardId: string;
-}
-
-export const TaskMenu: React.FC<CardMenuProps> = (props: CardMenuProps) => {
-  const { onChangeText, onSetToggle, onDeleteCard } = useTaskMenu();
-
-  const [text, setText] = useState(props.taskText);
-
-  const deleteCardFunc = () => {
-    onDeleteCard(props.taskId, props.boardId, props.columnId);
-    props.closePopup();
-    onSetToggle();
-  };
-
-  const changeTextFunc = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.currentTarget.value);
-  };
-
-  const closePopupFunc = () => {
-    onChangeText(props.taskId, props.boardId, props.columnId, text);
-    props.closePopup();
-    onSetToggle();
-  };
+export const TaskMenu: React.FC<CardMenuProps> = ({
+  taskId,
+  taskText,
+  columnId,
+  taskName,
+  taskDate,
+  closePopup,
+  boardId
+}: CardMenuProps) => {
+  const { closePopupFunc, deleteCardFunc, changeTextFunc } = useTaskMenu({
+    taskId,
+    taskText,
+    columnId,
+    boardId,
+    closePopup
+  });
 
   return (
     <div className={'popup'}>
       <div className={'card__menu_visible'}>
         <h3 className={'card__name'}>
           Current task:
-          {props.taskName}
+          {taskName}
         </h3>
         <div>
           <h3>Description: </h3>
           <textarea
             className={'card__description'}
             placeholder="Card Description"
-            defaultValue={props.taskText}
+            defaultValue={taskText}
             onChange={changeTextFunc}
           />
         </div>
         <div className={'card__date'}>
           <h4>Date: </h4>
-          <span>{(props.taskDate || '').toString()}</span>
+          <span>{(taskDate || '').toString()}</span>
         </div>
         <div className={'card__buttons'}>
           <button

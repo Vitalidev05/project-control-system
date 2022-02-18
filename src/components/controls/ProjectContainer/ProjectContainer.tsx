@@ -6,7 +6,7 @@ import {
   FooterContainer,
   PageContainer
 } from '../../../assets/stylesheets/styles';
-import { Footer } from '../../controls/Footer';
+import { Footer } from '../../blocks/Footer';
 import { Header } from '../../blocks/Header';
 
 interface IElements {
