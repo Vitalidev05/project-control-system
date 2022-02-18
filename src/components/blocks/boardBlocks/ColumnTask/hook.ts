@@ -2,7 +2,7 @@ import { IBoardList } from '../../../../constants';
 import { useSelector } from 'react-redux';
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import isHidden from '../../../../utils/isHidden';
@@ -19,7 +19,8 @@ export const useColumnTask = ({
   taskName,
   isPreview
 }: HookProps) => {
-  const boardList: IBoardList | undefined = useSelector(selectBoard(boardId));
+  const memoizeSelectBoard = useMemo(() => selectBoard(boardId), [boardId]);
+  const boardList: IBoardList | undefined = useSelector(memoizeSelectBoard);
 
   const isDisable: boolean = useSelector(selectDnd);
 

@@ -2,7 +2,7 @@ import { IBoardList, IColumns } from '../../../../constants';
 import { useSelector } from 'react-redux';
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { HoverDrag } from '../../../../types/shared';
@@ -21,7 +21,8 @@ export const useColumn = ({
   const { onMoveColumn, onMoveTask, onDeleteColumn, onSetDraggedItem } =
     useActions();
 
-  const boardList: IBoardList | undefined = useSelector(selectBoard(boardId));
+  const memoizeSelectBoard = useMemo(() => selectBoard(boardId), [boardId]);
+  const boardList: IBoardList | undefined = useSelector(memoizeSelectBoard);
 
   const isDisable: boolean = useSelector(selectDnd);
 

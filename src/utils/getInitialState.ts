@@ -4,6 +4,7 @@ import { IBoardList } from '../constants';
 
 interface InitialState {
   boardList: IBoardList[];
+  currentBoardId?: string;
 }
 
 const getInitialState = (name = 'Board'): InitialState => {

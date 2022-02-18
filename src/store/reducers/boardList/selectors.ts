@@ -9,6 +9,7 @@ export const selectBoardList = createSelector(
 );
 
 export const selectBoard = (selectBoardId: string) => {
+  console.log('select board');
   return createSelector(selectBoardList, (state) => {
     return state.find(({ boardId }) => boardId === selectBoardId);
   });
