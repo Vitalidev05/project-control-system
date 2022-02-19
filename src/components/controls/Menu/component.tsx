@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import '../../icons/BaseIcon/BaseIcon.scss';
 import { HomeHeaderIcon } from '../../icons';
 import { IMenu } from '../../../constants';
 
 import StyledMenu, { IconWrapper } from './Menu.styled';
+import { RouteConst } from '../../../router/routeConst';
 
-export const Menu = ({ open }: IMenu) => (
+export const Menu = memo(({ open }: IMenu) => (
   <StyledMenu open={open}>
-    <a href="/">
+    <a href={RouteConst.HOME}>
       <IconWrapper>
         <HomeHeaderIcon className={'size_sm'} />
       </IconWrapper>
       <div>Homepage</div>
     </a>
 
-    <a href="/boardList">
+    <a href={RouteConst.BOARD_LIST}>
       <span role="img" aria-label="Go to boards">
         {' '}
         &#x1f427;
@@ -23,4 +24,4 @@ export const Menu = ({ open }: IMenu) => (
       Go to boards
     </a>
   </StyledMenu>
-);
+));

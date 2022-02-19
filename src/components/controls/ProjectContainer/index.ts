@@ -1,1 +1,1 @@
-export { ProjectContainer } from './ProjectContainer';
+export { ProjectContainer } from './component';

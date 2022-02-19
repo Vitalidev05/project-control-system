@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { XYCoord, useDragLayer } from 'react-dnd';
 
 import { CustomDragLayerContainer } from '../../../assets/stylesheets/styles';
@@ -22,10 +22,8 @@ function getItemStyles(currentOffset: XYCoord | null) {
   };
 }
 
-export const CustomDragLayer: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+export const CustomDragLayer: React.FC = memo(() => {
   const { isDragging, item, currentOffset } = useDragLayer((monitor) => ({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     item: monitor.getItem(),
     currentOffset: monitor.getSourceClientOffset(),
     isDragging: monitor.isDragging()
@@ -35,7 +33,6 @@ export const CustomDragLayer: React.FC = () => {
     return null;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
   const itemDrag: DragItem = item.payload.Drag;
 
   return (
@@ -63,4 +60,4 @@ export const CustomDragLayer: React.FC = () => {
       </div>
     </CustomDragLayerContainer>
   );
-};
+});

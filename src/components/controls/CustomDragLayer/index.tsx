@@ -1,1 +1,1 @@
-export { CustomDragLayer } from './CustomDragLayer';
+export { CustomDragLayer } from './component';

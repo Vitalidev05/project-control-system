@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './Search.scss';
 import '../../icons/BaseIcon/BaseIcon.scss';
 import { SearchHeaderIcon } from '../../icons';
 
-export const Search = () => (
+export const Search = memo(() => (
   <div className={'search__wrapper'}>
     <i className={'search__icon'}>
       <SearchHeaderIcon className={'size_xs'} />
@@ -17,4 +17,4 @@ export const Search = () => (
       // onChange={() => console.log('change')}
     />
   </div>
-);
+));

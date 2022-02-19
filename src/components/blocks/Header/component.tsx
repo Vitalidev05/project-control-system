@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Burger } from '../../controls/Burger';
@@ -7,14 +7,10 @@ import { Menu } from '../../controls/Menu';
 import { Search } from '../../controls/Search';
 import '../../icons/BaseIcon/BaseIcon.scss';
 import { HomeHeaderIcon } from '../../icons';
-
-import useOnClickOutside from './hook';
+import { useHeader } from './hook';
 
 export const Header = memo(() => {
-  const [open, setOpen] = useState<boolean>(false);
-  const node = useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(node, () => setOpen(false));
+  const { open, node, setOpen } = useHeader();
 
   return (
     <header className={'header'}>
