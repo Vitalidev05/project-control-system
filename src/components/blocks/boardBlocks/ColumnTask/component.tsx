@@ -6,6 +6,7 @@ import { CardMenuIcon } from '../../../icons';
 import { TaskMenu as CardMenu } from '../TaskMenu';
 import { useColumnTask } from './hook';
 import { ColumnProps } from './types';
+import { DropPlace } from '../../../controls/DropPlace';
 
 export const ColumnTask = memo(
   ({
@@ -28,20 +29,25 @@ export const ColumnTask = memo(
     });
 
     return (
-      <CardContainer isPreview={isPreview} isHidden={hide} ref={ref}>
-        {taskName}
-        <CardMenuIcon className={'size_xs'} onClick={toggle} />
-        {showPopup && (
-          <CardMenu
-            taskText={taskText}
-            taskDate={taskDate}
-            taskName={taskName}
-            closePopup={togglePopup}
-            taskId={taskId}
-            columnId={columnId}
-            boardId={boardId}
-          />
+      <CardContainer isPreview={isPreview} ref={ref} isHidden={hide}>
+        {!hide && (
+          <>
+            {taskName}
+            <CardMenuIcon className={'size_xs'} onClick={toggle} />
+            {showPopup && (
+              <CardMenu
+                taskText={taskText}
+                taskDate={taskDate}
+                taskName={taskName}
+                closePopup={togglePopup}
+                taskId={taskId}
+                columnId={columnId}
+                boardId={boardId}
+              />
+            )}
+          </>
         )}
+        {hide && <DropPlace />}
       </CardContainer>
     );
   }

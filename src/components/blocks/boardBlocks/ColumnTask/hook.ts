@@ -93,6 +93,7 @@ export const useColumnTask = ({
   const [, drag, preview] = useDrag(dragConfig);
 
   useEffect(() => {
+    console.log(preview);
     preview(getEmptyImage());
   }, [preview]);
 

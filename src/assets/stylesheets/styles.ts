@@ -64,11 +64,16 @@ interface DragPreviewContainerProps {
 }
 
 export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
+  transform: ${(props) => (props.isPreview ? 'rotate(-7deg)' : undefined)};
+  opacity: ${(props) => (props.isHidden ? 0 : 1)};
+`;
+
+export const DragPreviewContainerColumn = styled.div<DragPreviewContainerProps>`
   transform: ${(props) => (props.isPreview ? 'rotate(1deg)' : undefined)};
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
 `;
 
-export const ColumnContainer = styled(DragPreviewContainer)`
+export const ColumnContainer = styled(DragPreviewContainerColumn)`
   position: relative;
   width: 18.5rem;
   min-height: 40px;
@@ -95,6 +100,7 @@ export const CardContainer = styled(DragPreviewContainer)`
   cursor: pointer;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
+  height: 110px;
   max-width: 300px;
   border-radius: 10px;
   box-shadow: #091e4240 0px 1px 0px 0px;
