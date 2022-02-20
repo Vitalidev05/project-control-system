@@ -5,6 +5,7 @@ import { AddNewItemForm } from '../AddNewItemForm';
 import { useAddNewItem } from './hook';
 
 import { Props } from './types';
+import { Box, Button } from '@mui/material';
 
 export const AddNewItem = memo(
   ({ functionName, toggleButtonText, dark, boardId, columnId }: Props) => {
@@ -19,9 +20,19 @@ export const AddNewItem = memo(
     }
 
     return (
-      <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
-        {toggleButtonText}
-      </AddItemButton>
+      <Box>
+        <Button
+          onClick={() => setShowForm(true)}
+          color="warning"
+          variant="text"
+          sx={{ textTransform: 'none', width: '100%', my: 2 }}
+        >
+          {toggleButtonText}
+        </Button>
+        {/*<AddItemButton dark={dark} onClick={() => setShowForm(true)}>*/}
+        {/*  {toggleButtonText}*/}
+        {/*</AddItemButton>*/}
+      </Box>
     );
   }
 );

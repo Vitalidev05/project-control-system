@@ -146,8 +146,6 @@ const boardList = (state = initialState, action: ActionType) => {
     case MOVE_TASK: {
       const { dragIndex, hoverIndex, sourceColumn, targetColumn, boardId } =
         action.payload;
-      // console.log(action.payload);
-
       const targetBoardIndex = state.boardList.findIndex(
         (x) => x.boardId === boardId
       );

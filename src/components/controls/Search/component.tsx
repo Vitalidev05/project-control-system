@@ -10,11 +10,6 @@ export const Search = memo(() => (
       <SearchHeaderIcon className={'size_xs'} />
     </i>
 
-    <input
-      type="search"
-      placeholder="Search..."
-      className={'search__input'}
-      // onChange={() => console.log('change')}
-    />
+    <input type="search" placeholder="Search..." className={'search__input'} />
   </div>
 ));

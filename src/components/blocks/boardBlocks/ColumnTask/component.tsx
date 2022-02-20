@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { CardContainer } from '../../../../assets/stylesheets/styles';
+import { DragPreviewContainer } from '../../../../assets/stylesheets/styles';
 import '../../../icons/BaseIcon/BaseIcon.scss';
 import { CardMenuIcon } from '../../../icons';
 
@@ -7,6 +7,8 @@ import { TaskMenu as CardMenu } from '../TaskMenu';
 import { useColumnTask } from './hook';
 import { ColumnProps } from './types';
 import { DropPlace } from '../../../controls/DropPlace';
+import { CardContainer } from '../../../controls/CardContainer';
+import { Box } from '@mui/material';
 
 export const ColumnTask = memo(
   ({
@@ -29,9 +31,28 @@ export const ColumnTask = memo(
     });
 
     return (
-      <CardContainer isPreview={isPreview} ref={ref} isHidden={hide}>
+      <DragPreviewContainer isPreview={isPreview} ref={ref}>
+        {hide && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              backgroundColor: 'background.default',
+              cursor: 'pointer',
+              marginBottom: '0.5rem',
+              padding: '0.5rem 1rem',
+              height: '110px',
+              maxWidth: '300px',
+              borderRadius: 1,
+              border: '1px solid lightgrey',
+              boxShadow: '#091e4240 0px 1px 0px 0px'
+            }}
+          />
+        )}
+
         {!hide && (
-          <>
+          <CardContainer>
             {taskName}
             <CardMenuIcon className={'size_xs'} onClick={toggle} />
             {showPopup && (
@@ -45,10 +66,9 @@ export const ColumnTask = memo(
                 boardId={boardId}
               />
             )}
-          </>
+          </CardContainer>
         )}
-        {hide && <DropPlace />}
-      </CardContainer>
+      </DragPreviewContainer>
     );
   }
 );

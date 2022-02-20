@@ -1,17 +1,18 @@
 import React, { memo } from 'react';
 
-import { AppContainer } from '../../assets/stylesheets/styles';
 import { AddNewItem } from '../../components/blocks/boardBlocks/AddNewItem';
 import { BoardColumn as Column } from '../../components/blocks/boardBlocks/Column';
 import { CustomDragLayer } from '../../components/controls/CustomDragLayer';
 import { IColumns } from '../../constants';
 import { useBoard } from './hook';
+import { BoardContainer } from '../../components/controls/BoardContainer';
+import { Box, Typography } from '@mui/material';
 
 export const Board = memo(() => {
-  const { columns, boardID } = useBoard();
+  const { columns, boardID, boardName, boardColor } = useBoard();
 
   return (
-    <AppContainer>
+    <BoardContainer boardName={boardName} boardColor={boardColor}>
       <CustomDragLayer />
       {columns.map((list: IColumns, index: number) => (
         <Column
@@ -27,6 +28,6 @@ export const Board = memo(() => {
         boardId={boardID}
         functionName="addColumn"
       />
-    </AppContainer>
+    </BoardContainer>
   );
 });

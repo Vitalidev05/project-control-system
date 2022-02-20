@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import {
-  ColumnContainer,
-  ColumnTitle
+  ColumnTitle,
+  DragPreviewContainerColumn
 } from '../../../../assets/stylesheets/styles';
 import { AddNewItem } from '../AddNewItem';
 import { ColumnTask } from '../ColumnTask';
@@ -10,6 +10,8 @@ import { CrossIcon } from '../../../icons';
 import { useColumn } from './hook';
 import { ColumnProps } from './types';
 import { DropPlace } from '../../../controls/DropPlace';
+import { ColumnContainer } from '../../../controls/ColumnContainer';
+import { Box } from '@mui/material';
 
 export const BoardColumn = memo(
   ({ columnName, columnId, index, boardId, isPreview }: ColumnProps) => {
@@ -22,34 +24,42 @@ export const BoardColumn = memo(
     });
 
     return (
-      <ColumnContainer isPreview={isPreview} ref={ref} isHidden={hide}>
-        {!hide && (
-          <>
-            <CrossIcon className={'size_l'} onClick={deleteColumnFunc} />
-            <ColumnTitle>{columnName}</ColumnTitle>
-            {targetBoardColumn?.columnTasks.map((task, index) => (
-              <ColumnTask
-                taskDate={task.taskDate}
-                key={task.taskId}
-                taskName={task.taskName}
-                taskText={task.taskText}
-                taskIndex={index}
-                columnId={targetBoardColumn?.columnId}
-                taskId={task.taskId}
+      <DragPreviewContainerColumn
+        isPreview={isPreview}
+        ref={ref}
+        isHidden={hide}
+      >
+        <ColumnContainer>
+          {!hide && (
+            <>
+              <Box sx={{ py: 3, display: 'flex', alignItems: 'center' }}>
+                <CrossIcon className={'size_l'} onClick={deleteColumnFunc} />
+                <ColumnTitle>{columnName}</ColumnTitle>
+              </Box>
+              {targetBoardColumn?.columnTasks.map((task, index) => (
+                <ColumnTask
+                  taskDate={task.taskDate}
+                  key={task.taskId}
+                  taskName={task.taskName}
+                  taskText={task.taskText}
+                  taskIndex={index}
+                  columnId={targetBoardColumn?.columnId}
+                  taskId={task.taskId}
+                  boardId={boardId}
+                />
+              ))}
+              <AddNewItem
+                toggleButtonText="Add card"
+                functionName="addTask"
+                columnId={columnId}
                 boardId={boardId}
+                dark
               />
-            ))}
-            <AddNewItem
-              toggleButtonText="+add new task"
-              functionName="addTask"
-              columnId={columnId}
-              boardId={boardId}
-              dark
-            />
-          </>
-        )}
-        {hide && <DropPlace />}
-      </ColumnContainer>
+            </>
+          )}
+          {hide && <DropPlace />}
+        </ColumnContainer>
+      </DragPreviewContainerColumn>
     );
   }
 );

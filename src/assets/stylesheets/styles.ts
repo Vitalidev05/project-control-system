@@ -77,7 +77,6 @@ export const ColumnContainer = styled(DragPreviewContainerColumn)`
   position: relative;
   width: 18.5rem;
   min-height: 40px;
-  margin: 0 10px;
   padding: 8px;
   color: #000;
   background-color: #fbfafa;

@@ -21,6 +21,16 @@ export const selectBoard = createSelector(
   }
 );
 
+export const selectBoardName = createSelector(
+  selectBoard,
+  (state) => state?.boardName || ''
+);
+
+export const selectBoardColor = createSelector(
+  selectBoard,
+  (state) => state?.boardColor || '#fff'
+);
+
 export const selectBoardColumns = createSelector(
   selectBoard,
   (state) => state?.boardColumns || []
