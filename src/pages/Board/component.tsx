@@ -6,7 +6,7 @@ import { CustomDragLayer } from '../../components/controls/CustomDragLayer';
 import { IColumns } from '../../constants';
 import { useBoard } from './hook';
 import { BoardContainer } from '../../components/controls/BoardContainer';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 export const Board = memo(() => {
   const { columns, boardID, boardName, boardColor } = useBoard();
@@ -23,11 +23,14 @@ export const Board = memo(() => {
           boardId={boardID}
         />
       ))}
-      <AddNewItem
-        toggleButtonText="+add new list"
-        boardId={boardID}
-        functionName="addColumn"
-      />
+      <Box sx={{ minWidth: 270 }}>
+        <AddNewItem
+          toggleButtonText="Add column"
+          boardId={boardID}
+          functionName="addColumn"
+          variant="outlined"
+        />
+      </Box>
     </BoardContainer>
   );
 });

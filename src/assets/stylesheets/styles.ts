@@ -64,25 +64,27 @@ interface DragPreviewContainerProps {
 }
 
 export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
-  transform: ${(props) => (props.isPreview ? 'rotate(-7deg)' : undefined)};
+  //transform: ${(props) => (props.isPreview ? 'rotate(-7deg)' : undefined)};
+  //todo
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
+  z-index: 2;
 `;
 
 export const DragPreviewContainerColumn = styled.div<DragPreviewContainerProps>`
-  transform: ${(props) => (props.isPreview ? 'rotate(1deg)' : undefined)};
+  //transform: ${(props) => (props.isPreview ? 'rotate(1deg)' : undefined)};
+  //todo
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
 `;
 
 export const ColumnContainer = styled(DragPreviewContainerColumn)`
   position: relative;
-  width: 18.5rem;
-  min-height: 40px;
-  padding: 8px;
-  color: #000;
-  background-color: #fbfafa;
-  flex-grow: 0;
-  flex-shrink: 0;
-  border-radius: 10px;
+  min-width: 330px;
+  // minHeight: '40px',
+  padding: 0 16px;
+  // color: #000,
+  // backgroundColor: '#fbfafa',
+  background-color: #fff;
+  border-radius: 3px;
   box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
 `;
 
@@ -102,7 +104,7 @@ export const CardContainer = styled(DragPreviewContainer)`
   height: 110px;
   max-width: 300px;
   border-radius: 10px;
-  box-shadow: #091e4240 0px 1px 0px 0px;
+  box-shadow: #091e4240 0 1px 0 0;
 `;
 
 interface AddItemButtonProps {
@@ -167,7 +169,7 @@ export const CustomDragLayerContainer = styled.div`
   width: 100%;
   height: 100%;
   left: 0;
-  top: 0;
+  top: -15px;
   pointer-events: none;
   position: fixed;
   z-index: 100;

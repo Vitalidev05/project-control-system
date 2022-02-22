@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 
-import { AddItemButton } from '../../../../assets/stylesheets/styles';
 import { AddNewItemForm } from '../AddNewItemForm';
 import { useAddNewItem } from './hook';
 
@@ -8,7 +7,13 @@ import { Props } from './types';
 import { Box, Button } from '@mui/material';
 
 export const AddNewItem = memo(
-  ({ functionName, toggleButtonText, dark, boardId, columnId }: Props) => {
+  ({
+    functionName,
+    toggleButtonText,
+    boardId,
+    columnId,
+    variant = 'text'
+  }: Props) => {
     const { onAdd, setShowForm, showForm } = useAddNewItem({
       columnId,
       boardId,
@@ -24,14 +29,11 @@ export const AddNewItem = memo(
         <Button
           onClick={() => setShowForm(true)}
           color="warning"
-          variant="text"
-          sx={{ textTransform: 'none', width: '100%', my: 2 }}
+          variant={variant}
+          sx={{ textTransform: 'none', width: '100%' }}
         >
           {toggleButtonText}
         </Button>
-        {/*<AddItemButton dark={dark} onClick={() => setShowForm(true)}>*/}
-        {/*  {toggleButtonText}*/}
-        {/*</AddItemButton>*/}
       </Box>
     );
   }

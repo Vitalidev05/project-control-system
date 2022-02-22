@@ -6,7 +6,8 @@ import { CardMenuIcon } from '../../../icons';
 import { TaskMenu as CardMenu } from '../TaskMenu';
 import { useColumnTask } from './hook';
 import { ColumnProps } from './types';
-import { DropPlace } from '../../../controls/DropPlace';
+import greyLines from '../../../../assets/images/gray_line.png';
+
 import { CardContainer } from '../../../controls/CardContainer';
 import { Box } from '@mui/material';
 
@@ -40,15 +41,24 @@ export const ColumnTask = memo(
               justifyContent: 'space-between',
               backgroundColor: 'background.default',
               cursor: 'pointer',
-              marginBottom: '0.5rem',
-              padding: '0.5rem 1rem',
               height: '110px',
+              width: '100%',
               maxWidth: '300px',
               borderRadius: 1,
+              zIndex: 1,
               border: '1px solid lightgrey',
-              boxShadow: '#091e4240 0px 1px 0px 0px'
+              background: `url(${greyLines}) 0 0 repeat`,
+              backgroundSize: '100%',
+              opacity: 0.4
             }}
-          />
+          >
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%'
+              }}
+            />
+          </Box>
         )}
 
         {!hide && (

@@ -4,4 +4,5 @@ export type Props = {
   toggleButtonText: string;
   columnId?: string;
   dark?: boolean;
+  variant?: 'text' | 'outlined' | 'contained';
 };

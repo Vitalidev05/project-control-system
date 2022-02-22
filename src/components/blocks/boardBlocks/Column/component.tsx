@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import {
   ColumnTitle,
-  DragPreviewContainerColumn
+  ColumnContainer
 } from '../../../../assets/stylesheets/styles';
 import { AddNewItem } from '../AddNewItem';
 import { ColumnTask } from '../ColumnTask';
@@ -10,7 +10,6 @@ import { CrossIcon } from '../../../icons';
 import { useColumn } from './hook';
 import { ColumnProps } from './types';
 import { DropPlace } from '../../../controls/DropPlace';
-import { ColumnContainer } from '../../../controls/ColumnContainer';
 import { Box } from '@mui/material';
 
 export const BoardColumn = memo(
@@ -24,18 +23,22 @@ export const BoardColumn = memo(
     });
 
     return (
-      <DragPreviewContainerColumn
-        isPreview={isPreview}
-        ref={ref}
-        isHidden={hide}
-      >
-        <ColumnContainer>
-          {!hide && (
-            <>
-              <Box sx={{ py: 3, display: 'flex', alignItems: 'center' }}>
-                <CrossIcon className={'size_l'} onClick={deleteColumnFunc} />
-                <ColumnTitle>{columnName}</ColumnTitle>
-              </Box>
+      <ColumnContainer isPreview={isPreview} ref={ref} isHidden={hide}>
+        {!hide && (
+          <>
+            <Box sx={{ py: 3, display: 'flex', alignItems: 'center' }}>
+              <CrossIcon className={'size_l'} onClick={deleteColumnFunc} />
+              <ColumnTitle>{columnName}</ColumnTitle>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+                maxHeight: '420px',
+                overflowY: 'auto'
+              }}
+            >
               {targetBoardColumn?.columnTasks.map((task, index) => (
                 <ColumnTask
                   taskDate={task.taskDate}
@@ -48,6 +51,9 @@ export const BoardColumn = memo(
                   boardId={boardId}
                 />
               ))}
+            </Box>
+
+            <Box sx={{ my: 2 }}>
               <AddNewItem
                 toggleButtonText="Add card"
                 functionName="addTask"
@@ -55,11 +61,11 @@ export const BoardColumn = memo(
                 boardId={boardId}
                 dark
               />
-            </>
-          )}
-          {hide && <DropPlace />}
-        </ColumnContainer>
-      </DragPreviewContainerColumn>
+            </Box>
+          </>
+        )}
+        {hide && <DropPlace />}
+      </ColumnContainer>
     );
   }
 );

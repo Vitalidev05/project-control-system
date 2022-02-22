@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 export const BoardContainer: React.FC<{
   boardName: string;
   boardColor: string;
-}> = memo(({ children, boardColor, boardName }) => {
+}> = memo(({ children, boardName }) => {
   return (
     <Box
       sx={{
@@ -47,7 +47,7 @@ export const BoardContainer: React.FC<{
           flex: 1,
           gap: 2,
           // minHeight: '100%',
-          overflow: 'auto',
+          overflowX: 'auto',
           '&::-webkit-scrollbar-track': {
             boxShadow: 'inset 0 0 6px #e7e7e7',
             borderRadius: '0.3rem',
