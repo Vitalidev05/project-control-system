@@ -48,7 +48,7 @@ export const ColumnTask = memo(
               zIndex: 1,
               border: '1px solid lightgrey',
               background: `url(${greyLines}) 0 0 repeat`,
-              backgroundSize: '100%',
+              backgroundSize: '80%',
               opacity: 0.4
             }}
           >

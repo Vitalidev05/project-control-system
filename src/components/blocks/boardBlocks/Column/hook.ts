@@ -1,8 +1,15 @@
-import { IColumns } from '../../../../constants';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
+
+import { IColumns, Priority } from '../../../../constants';
 import { useSelector } from 'react-redux';
 import { DragItem } from '../../../../context/DragItem';
 import { useActions } from '../../../../utils/useActions';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { HoverDrag } from '../../../../types/shared';
@@ -33,6 +40,11 @@ export const useColumn = ({
   const targetBoardColumn: IColumns | undefined = useMemo(
     () => columns[index],
     [columns, index]
+  );
+
+  const columnPriority: Priority = useMemo(
+    () => targetBoardColumn?.priority || 'none',
+    [targetBoardColumn]
   );
 
   const ref = useRef<HTMLDivElement>(null);
@@ -118,10 +130,42 @@ export const useColumn = ({
 
   drag(drop(ref));
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setAnchorEl(null);
+  }, []);
+
+  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
+
+  const options = useMemo(() => {
+    return [
+      {
+        name: 'Edit',
+        action: () => {
+          console.log('edit');
+        }
+      },
+      {
+        name: 'Delete',
+        action: deleteColumnFunc
+      }
+    ];
+  }, [deleteColumnFunc]);
+
   return {
-    deleteColumnFunc,
     targetBoardColumn,
     ref,
-    hide
+    hide,
+    columnPriority,
+    handleClick,
+    handleClose,
+    anchorEl,
+    open,
+    options
   };
 };

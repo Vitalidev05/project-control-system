@@ -35,7 +35,10 @@ interface IBoardList {
   boardColumns: IColumns[];
 }
 
+export type Priority = 'none' | 'low' | 'medium' | 'high';
+
 interface IColumns {
+  priority: Priority;
   columnId: string;
   columnName: string;
   columnTasks: IBoardTasks[];
@@ -45,14 +48,22 @@ interface IBoardTasks {
   taskId: string;
   taskName: string;
   taskText: string;
+  priority: Priority;
   taskDate: Date;
 }
 
-interface IPayload {
+export type AddColumnPayload = {
   text: string;
-  boardId?: string;
-  columnId?: string;
-}
+  boardId: string;
+  priority?: Priority;
+};
+
+export type AddTaskPayload = {
+  text: string;
+  boardId: string;
+  columnId: string;
+  priority?: Priority;
+};
 
 interface IMoveColumn {
   dragIndex: number;
@@ -110,7 +121,7 @@ type ActionType =
     }
   | {
       type: typeof ADD_COLUMN;
-      payload: { text: string; boardId: string };
+      payload: { text: string; boardId: string; priority?: Priority };
     }
   | {
       type: typeof ADD_TASK;
@@ -118,6 +129,7 @@ type ActionType =
         text: string;
         boardId: string;
         columnId: string;
+        priority: Priority;
       };
     }
   | {
@@ -217,7 +229,6 @@ export type {
   IColumns,
   IBoardTasks,
   ActionType,
-  IPayload,
   IMoveColumn,
   IMoveTask,
   ISetDraggedItem,

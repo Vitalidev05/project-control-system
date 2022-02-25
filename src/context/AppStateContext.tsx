@@ -9,6 +9,7 @@ import {
   findItemIndexById,
   moveItem
 } from '../utils/arrayUtils';
+import { Priority } from '../constants';
 
 interface Task {
   id: string;
@@ -37,7 +38,7 @@ type Action =
     }
   | {
       type: 'ADD_TASK';
-      payload: { itemText: string; listId: string };
+      payload: { itemText: string; listId: string; priority?: Priority };
     }
   | {
       type: 'MOVE_LIST';

@@ -58,6 +58,7 @@ const boardList = (state = initialState, action: ActionType) => {
         boardColumns: [
           ...targetBoard.boardColumns,
           {
+            priority: action.payload?.priority || 'none',
             columnId: nanoid(),
             columnName: action.payload.text,
             columnTasks: []
@@ -94,6 +95,7 @@ const boardList = (state = initialState, action: ActionType) => {
         columnTasks: [
           ...targetColumn.columnTasks,
           {
+            priority: action.payload?.priority || 'none',
             taskId: nanoid(),
             taskName: action.payload.text,
             taskText: '',

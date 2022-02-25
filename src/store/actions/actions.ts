@@ -1,7 +1,6 @@
 import { Dispatch } from 'react';
 
 import {
-  IPayload,
   IMoveColumn,
   IMoveTask,
   ISetDraggedItem,
@@ -9,7 +8,9 @@ import {
   IDeleteColumn,
   IDeleteBoard,
   IChangeText,
-  IAddBoard
+  IAddBoard,
+  AddColumnPayload,
+  AddTaskPayload
 } from '../../constants';
 
 import {
@@ -83,14 +84,14 @@ function addBoard(obj: IAddBoard) {
   };
 }
 
-function addColumn(obj: IPayload) {
+function addColumn(obj: AddColumnPayload) {
   return {
     type: ADD_COLUMN,
     payload: obj
   };
 }
 
-function addTask(obj: IPayload) {
+function addTask(obj: AddTaskPayload) {
   return {
     type: ADD_TASK,
     payload: obj

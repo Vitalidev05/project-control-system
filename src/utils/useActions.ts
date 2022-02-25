@@ -15,6 +15,7 @@ import {
 } from '../store/actions/actions';
 import { DragItem } from '../context/DragItem';
 import { useCallback } from 'react';
+import { Priority } from '../constants';
 
 export const useActions = () => {
   const dispatch = useDispatch();
@@ -24,17 +25,26 @@ export const useActions = () => {
     [dispatch]
   );
 
-  const onAddColumn: (str: string, boardId: string) => void = useCallback(
-    (str, boardId) => dispatch(addColumn({ text: str, boardId })),
+  const onAddColumn: (
+    str: string,
+    boardId: string,
+    priority?: Priority
+  ) => void = useCallback(
+    (str, boardId, priority) =>
+      dispatch(addColumn({ text: str, boardId, priority })),
     [dispatch]
   );
 
-  const onAddTask: (str: string, boardId: string, columnId: string) => void =
-    useCallback(
-      (str, boardId, columnId) =>
-        dispatch(addTask({ text: str, boardId, columnId })),
-      [dispatch]
-    );
+  const onAddTask: (
+    str: string,
+    boardId: string,
+    columnId: string,
+    priority?: Priority
+  ) => void = useCallback(
+    (str, boardId, columnId, priority) =>
+      dispatch(addTask({ text: str, boardId, columnId, priority })),
+    [dispatch]
+  );
 
   const onDeleteColumn: (boardId: string, columnId: string) => void =
     useCallback(

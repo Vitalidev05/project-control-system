@@ -6,11 +6,6 @@ declare module '@mui/material/styles' {
     status: {
       danger: string;
     };
-    palette: {
-      common: {
-        grey: string;
-      };
-    };
   }
 
   // allow configuration using `createTheme`
