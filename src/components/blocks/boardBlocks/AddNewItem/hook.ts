@@ -25,5 +25,6 @@ export const useAddNewItem = ({
     [boardId, columnId, functionName, onAddColumn, onAddTask]
   );
 
-  return { showForm, setShowForm, onAdd };
+  const handleClose = useCallback(() => setShowForm(false), []);
+  return { showForm, setShowForm, onAdd, handleClose };
 };

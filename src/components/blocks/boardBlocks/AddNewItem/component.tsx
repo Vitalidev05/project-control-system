@@ -14,14 +14,20 @@ export const AddNewItem = memo(
     columnId,
     variant = 'text'
   }: Props) => {
-    const { onAdd, setShowForm, showForm } = useAddNewItem({
+    const { onAdd, setShowForm, showForm, handleClose } = useAddNewItem({
       columnId,
       boardId,
       functionName
     });
 
     if (showForm) {
-      return <AddNewItemForm onAdd={onAdd} />;
+      return (
+        <AddNewItemForm
+          close={handleClose}
+          onAddText={toggleButtonText}
+          onAdd={onAdd}
+        />
+      );
     }
 
     return (

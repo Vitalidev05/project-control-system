@@ -46,6 +46,7 @@ export const BoardContainer: React.FC<{
           alignItems: 'flex-start',
           flex: 1,
           gap: 2,
+          pr: 2,
           // minHeight: '100%',
           overflowX: 'auto',
           '&::-webkit-scrollbar-track': {
