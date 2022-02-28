@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { Props } from './types';
 import { theme } from '../../../theme';
 
-export const PriorityIndicator = memo(({ variant }: Props) => {
+export const PriorityIndicator = memo(({ variant, width = 1 }: Props) => {
   const borderColor = useMemo(() => {
     if (variant === 'low') return theme.palette.primary.main;
     if (variant === 'medium') return theme.palette.info.main;
@@ -15,10 +15,10 @@ export const PriorityIndicator = memo(({ variant }: Props) => {
     <Box>
       <Box
         sx={{
-          width: 11,
-          height: 11,
+          width: 11 * width,
+          height: 11 * width,
           bgcolor: '#fff',
-          border: `3px solid ${borderColor}`,
+          border: `${3 * width}px solid ${borderColor}`,
           borderRadius: '50%'
         }}
       />

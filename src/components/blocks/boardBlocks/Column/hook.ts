@@ -42,6 +42,11 @@ export const useColumn = ({
     [columns, index]
   );
 
+  const targetBoardColumnName: string = useMemo(
+    () => targetBoardColumn?.columnName || '',
+    [targetBoardColumn]
+  );
+
   const columnPriority: Priority = useMemo(
     () => targetBoardColumn?.priority || 'none',
     [targetBoardColumn]
@@ -142,12 +147,16 @@ export const useColumn = ({
 
   const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
 
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = useCallback(() => setOpenModal(true), []);
+  const handleCloseModal = useCallback(() => setOpenModal(false), []);
+
   const options = useMemo(() => {
     return [
       {
         name: 'Edit',
         action: () => {
-          console.log('edit');
+          handleOpenModal();
         }
       },
       {
@@ -155,9 +164,11 @@ export const useColumn = ({
         action: deleteColumnFunc
       }
     ];
-  }, [deleteColumnFunc]);
+  }, [deleteColumnFunc, handleOpenModal]);
 
   return {
+    openModal,
+    handleCloseModal,
     targetBoardColumn,
     ref,
     hide,
@@ -166,6 +177,8 @@ export const useColumn = ({
     handleClose,
     anchorEl,
     open,
-    options
+    options,
+    targetBoardColumnName,
+    deleteColumnFunc
   };
 };
