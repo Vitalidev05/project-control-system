@@ -85,9 +85,8 @@ export const ColumnTask = memo(
               <IconButton>
                 <NotesIcon sx={{ color: theme.palette.grey[400] }} />
               </IconButton>
-              <Box sx={{ p: 1, display: 'flex', gap: 0.5 }}>
+              <Box sx={{ py: 1, display: 'flex', gap: 0.5 }}>
                 <AddUser variant="new" />
-                {/*<AddUser variant="medium" />*/}
               </Box>
             </Box>
 

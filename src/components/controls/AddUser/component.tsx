@@ -33,7 +33,12 @@ export const AddUser = memo(({ variant }: Props) => {
             alignItems: 'center'
           }}
         >
-          <AddIcon sx={{ color: 'lightgray', fontSize: 16, fontWeight: 600 }} />
+          <AddIcon
+            sx={{
+              color: theme.palette.grey[400],
+              fontSize: 18
+            }}
+          />
         </Box>
       )}
       {variant !== 'new' && (
