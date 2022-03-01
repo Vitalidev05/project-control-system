@@ -17,7 +17,6 @@ export const BoardContainer: React.FC<{
         bgcolor: 'background.default',
         flex: 1,
         maxWidth: '100%',
-        // minHeight: '100%',
         px: 4,
         pb: 5
       }}
