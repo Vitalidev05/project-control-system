@@ -12,7 +12,9 @@ import {
   DELETE_COLUMN,
   DELETE_BOARD,
   CHANGE_TEXT,
-  SET_CURRENT_BOARD
+  SET_CURRENT_BOARD,
+  CHANGE_COLUMN_TITLE,
+  CHANGE_COLUMN_PRIORITY
 } from '../../actions/actionTypes';
 
 import {
@@ -28,6 +30,80 @@ const initialState = getInitialState();
 
 const boardList = (state = initialState, action: ActionType) => {
   switch (action.type) {
+    case CHANGE_COLUMN_PRIORITY: {
+      const { boardId, columnId, priority } = action.payload;
+      const targetBoardIndex = state.boardList.findIndex(
+        (x) => x.boardId === boardId
+      );
+      const targetBoard = state.boardList[targetBoardIndex];
+
+      const targetColumnIndex = targetBoard?.boardColumns?.findIndex(
+        (x) => x.columnId === columnId
+      );
+
+      const targetColumn = targetBoard?.boardColumns[targetColumnIndex];
+
+      const updatedColumnList = {
+        ...targetBoard,
+        boardColumns: overrideItemAtIndex(
+          targetBoard?.boardColumns,
+          {
+            ...targetColumn,
+            priority: priority
+          },
+          targetColumnIndex
+        )
+      };
+
+      return {
+        ...state,
+        boardList: overrideItemAtIndex(
+          state.boardList,
+          updatedColumnList,
+          targetBoardIndex
+        )
+      };
+    }
+    case CHANGE_COLUMN_TITLE: {
+      const { boardId, columnId, title } = action.payload;
+      const targetBoardIndex = state.boardList.findIndex(
+        (x) => x.boardId === boardId
+      );
+      const targetBoard = state.boardList[targetBoardIndex];
+
+      const targetColumnIndex = targetBoard?.boardColumns?.findIndex(
+        (x) => x.columnId === columnId
+      );
+
+      const targetColumn = targetBoard?.boardColumns[targetColumnIndex];
+
+      const updatedColumnList = {
+        ...targetBoard,
+        boardColumns: overrideItemAtIndex(
+          targetBoard?.boardColumns,
+          {
+            ...targetColumn,
+            columnName: title
+          },
+          targetColumnIndex
+        )
+      };
+
+      // overrideItemAtIndex(
+      //   state.boardList,
+      //   updatedColumnList,
+      //   targetBoardIndex
+      // )
+
+      return {
+        ...state,
+        boardList: overrideItemAtIndex(
+          state.boardList,
+          updatedColumnList,
+          targetBoardIndex
+        )
+      };
+    }
     case SET_CURRENT_BOARD: {
       return {
         ...state,

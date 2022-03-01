@@ -19,15 +19,17 @@ export const ColumnModal = memo(
     openModal,
     activeItem,
     columnName,
-    onDelete
+    onDelete,
+    changeColumnTitle,
+    changeColumnPriority
   }: Props) => {
     const [activeElement, setActiveElement] = useState<Priority>(activeItem);
     const [columnTitle, setColumnTitle] = useState<string>(columnName);
 
     const onSubmit = () => {
-      console.log('activeElement', activeElement);
-      console.log('columnTitle', columnTitle);
-      // handleCloseModal()
+      changeColumnPriority(activeElement);
+      changeColumnTitle(columnTitle);
+      handleCloseModal();
     };
 
     return (

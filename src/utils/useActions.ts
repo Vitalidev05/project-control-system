@@ -3,6 +3,8 @@ import {
   addBoard,
   addColumn,
   addTask,
+  changeColumnPriority,
+  changeColumnTitle,
   changeText,
   deleteBoard,
   deleteColumn,
@@ -19,6 +21,26 @@ import { Priority } from '../constants';
 
 export const useActions = () => {
   const dispatch = useDispatch();
+
+  const changeColumnName: (
+    columnId: string,
+    title: string,
+    boardId: string
+  ) => void = useCallback(
+    (columnId, title, boardId) =>
+      dispatch(changeColumnTitle({ columnId, title, boardId })),
+    [dispatch]
+  );
+
+  const editColumnPriority: (
+    columnId: string,
+    priority: Priority,
+    boardId: string
+  ) => void = useCallback(
+    (columnId, priority, boardId) =>
+      dispatch(changeColumnPriority({ priority, columnId, boardId })),
+    [dispatch]
+  );
 
   const setCurrentBoardId: (currentBoard: string | null) => void = useCallback(
     (currentBoard) => dispatch(setCurrentBoard(currentBoard)),
@@ -133,6 +155,8 @@ export const useActions = () => {
     onChangeText,
     onAddBoard,
     onDeleteBoard,
-    setCurrentBoardId
+    setCurrentBoardId,
+    changeColumnName,
+    editColumnPriority
   };
 };

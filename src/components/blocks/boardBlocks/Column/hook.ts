@@ -28,8 +28,24 @@ export const useColumn = ({
   columnName,
   isPreview
 }: HookProps) => {
-  const { onMoveColumn, onMoveTask, onDeleteColumn, onSetDraggedItem } =
-    useActions();
+  const {
+    onMoveColumn,
+    onMoveTask,
+    onDeleteColumn,
+    onSetDraggedItem,
+    changeColumnName,
+    editColumnPriority
+  } = useActions();
+
+  const changeColumnTitle = useCallback(
+    (title: string) => changeColumnName(columnId, title, boardId),
+    [boardId, changeColumnName, columnId]
+  );
+
+  const changeColumnPriority = useCallback(
+    (priority: Priority) => editColumnPriority(columnId, priority, boardId),
+    [boardId, columnId, editColumnPriority]
+  );
 
   const columns = useSelector(selectBoardColumns);
 
@@ -179,6 +195,8 @@ export const useColumn = ({
     open,
     options,
     targetBoardColumnName,
-    deleteColumnFunc
+    deleteColumnFunc,
+    changeColumnTitle,
+    changeColumnPriority
   };
 };

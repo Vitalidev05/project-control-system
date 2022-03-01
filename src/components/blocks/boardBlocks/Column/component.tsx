@@ -26,7 +26,9 @@ export const BoardColumn = memo(
       openModal,
       handleCloseModal,
       targetBoardColumnName,
-      deleteColumnFunc
+      deleteColumnFunc,
+      changeColumnTitle,
+      changeColumnPriority
     } = useColumn({
       index,
       columnId,
@@ -132,6 +134,8 @@ export const BoardColumn = memo(
           {hide && <DropPlace />}
         </ColumnContainer>
         <ColumnModal
+          changeColumnPriority={changeColumnPriority}
+          changeColumnTitle={changeColumnTitle}
           columnName={targetBoardColumnName}
           activeItem={columnPriority}
           openModal={openModal}

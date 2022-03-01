@@ -10,7 +10,9 @@ import {
   IChangeText,
   IAddBoard,
   AddColumnPayload,
-  AddTaskPayload
+  AddTaskPayload,
+  ChangeColumnTitleProps,
+  ChangeColumnPriorityProps
 } from '../../constants';
 
 import {
@@ -33,7 +35,9 @@ import {
   SET_DISABLE_FALSE,
   SET_DISABLE_TRUE,
   TOGGLE_DISABLE,
-  SET_CURRENT_BOARD
+  SET_CURRENT_BOARD,
+  CHANGE_COLUMN_TITLE,
+  CHANGE_COLUMN_PRIORITY
 } from './actionTypes';
 
 function setCurrentBoard(str: string | null) {
@@ -146,6 +150,20 @@ function changeText(obj: IChangeText) {
     payload: obj
   };
 }
+
+export const changeColumnTitle = (obj: ChangeColumnTitleProps) => {
+  return {
+    type: CHANGE_COLUMN_TITLE,
+    payload: obj
+  };
+};
+
+export const changeColumnPriority = (obj: ChangeColumnPriorityProps) => {
+  return {
+    type: CHANGE_COLUMN_PRIORITY,
+    payload: obj
+  };
+};
 
 function setAuthTrue() {
   return {

@@ -14,7 +14,9 @@ import {
   SET_DISABLE_FALSE,
   SET_DISABLE_TRUE,
   TOGGLE_DISABLE,
-  SET_CURRENT_BOARD
+  SET_CURRENT_BOARD,
+  CHANGE_COLUMN_TITLE,
+  CHANGE_COLUMN_PRIORITY
 } from '../store/actions/actionTypes';
 
 import { DragItem } from '../context/DragItem';
@@ -105,12 +107,32 @@ interface IChangeText {
   text: string;
 }
 
+export type ChangeColumnTitleProps = {
+  boardId: string;
+  columnId: string;
+  title: string;
+};
+
+export type ChangeColumnPriorityProps = {
+  boardId: string;
+  columnId: string;
+  priority: Priority;
+};
+
 interface IAddBoard {
   boardName: string;
   boardColor: string;
 }
 
 type ActionType =
+  | {
+      type: typeof CHANGE_COLUMN_PRIORITY;
+      payload: ChangeColumnPriorityProps;
+    }
+  | {
+      type: typeof CHANGE_COLUMN_TITLE;
+      payload: ChangeColumnTitleProps;
+    }
   | {
       type: typeof SET_CURRENT_BOARD;
       payload: string | null;
