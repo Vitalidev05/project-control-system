@@ -12,7 +12,8 @@ export const CardContainer: React.FC = memo(({ children }) => {
         gap: 1,
         cursor: 'pointer',
         padding: 2,
-        height: '110px',
+        pl: 1,
+        minHeight: '110px',
         maxWidth: '300px',
         borderRadius: 1,
         border: '1px solid lightgrey'

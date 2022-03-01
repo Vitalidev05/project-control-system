@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material';
-import { orange } from '@mui/material/colors';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -31,7 +30,7 @@ export const theme = createTheme({
     },
     info: {
       main: '#feb64d',
-      light: '#fddcab'
+      light: '#fce8ca'
     },
     warning: {
       main: '#757575',

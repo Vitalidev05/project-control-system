@@ -11,6 +11,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { TaskPriorityIndicator } from '../../../controls/TaskPriorityIndicator';
 import { theme } from '../../../../theme';
 import NotesIcon from '@mui/icons-material/Notes';
+import { AddUser } from '../../../controls/AddUser';
 
 export const ColumnTask = memo(
   ({
@@ -66,20 +67,28 @@ export const ColumnTask = memo(
 
         {!hide && (
           <CardContainer>
-            <TaskPriorityIndicator variant={taskPriority} />
-            <Typography sx={{ color: theme.palette.grey[900] }}>
+            <Box sx={{ pl: 1 }}>
+              <TaskPriorityIndicator variant={taskPriority} />
+            </Box>
+            <Typography sx={{ color: theme.palette.grey[900], pl: 1 }}>
               {taskName}
             </Typography>
             <Box
               sx={{
                 width: '100%',
                 display: 'flex',
-                justifyContent: 'flex-end'
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
+                mt: 1
               }}
             >
               <IconButton>
                 <NotesIcon sx={{ color: theme.palette.grey[400] }} />
               </IconButton>
+              <Box sx={{ p: 1, display: 'flex', gap: 0.5 }}>
+                <AddUser variant="new" />
+                {/*<AddUser variant="medium" />*/}
+              </Box>
             </Box>
 
             {/*<CardMenuIcon className={'size_xs'} onClick={toggle} />*/}
