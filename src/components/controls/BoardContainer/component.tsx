@@ -15,10 +15,9 @@ export const BoardContainer: React.FC<{
         alignItems: 'center',
         gap: 3,
         bgcolor: 'background.default',
-        height: 'calc(100% - 95px)',
-        // py: 1,
+        flex: 1,
+        // minHeight: '100%',
         px: 4,
-        // my: 1,
         pb: 5
       }}
     >
