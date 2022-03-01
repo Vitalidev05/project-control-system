@@ -48,6 +48,7 @@ export const CustomDragLayer: React.FC = memo(() => {
           />
         ) : (
           <Card
+            taskPriority={itemDrag.priority}
             taskText=""
             columnId={itemDrag.columnId}
             isPreview

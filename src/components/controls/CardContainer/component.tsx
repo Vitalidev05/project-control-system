@@ -6,11 +6,12 @@ export const CardContainer: React.FC = memo(({ children }) => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
         backgroundColor: '#fff',
+        gap: 1,
         cursor: 'pointer',
-        padding: '0.5rem 1rem',
+        padding: 2,
         height: '110px',
         maxWidth: '300px',
         borderRadius: 1,

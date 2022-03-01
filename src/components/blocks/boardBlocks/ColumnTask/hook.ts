@@ -16,7 +16,8 @@ export const useColumnTask = ({
   taskIndex,
   columnId,
   taskName,
-  isPreview
+  isPreview,
+  taskPriority
 }: HookProps) => {
   const { onMoveTask, onSetToggle, onSetDraggedItem } = useActions();
   const draggedItem = useSelector(selectDraggedItem);
@@ -69,6 +70,7 @@ export const useColumnTask = ({
 
   const item: DragItem = useMemo(
     () => ({
+      priority: taskPriority,
       boardId: boardId,
       cardIndex: taskIndex,
       cardId: taskId,
@@ -76,7 +78,7 @@ export const useColumnTask = ({
       taskName: taskName,
       type: 'CARD'
     }),
-    [boardId, columnId, taskId, taskIndex, taskName]
+    [boardId, columnId, taskId, taskIndex, taskName, taskPriority]
   );
 
   const dragConfig = useMemo(

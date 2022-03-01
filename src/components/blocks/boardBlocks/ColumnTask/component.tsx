@@ -1,15 +1,16 @@
 import React, { memo } from 'react';
 import { DragPreviewContainer } from '../../../../assets/stylesheets/styles';
 import '../../../icons/BaseIcon/BaseIcon.scss';
-import { CardMenuIcon } from '../../../icons';
-
 import { TaskMenu as CardMenu } from '../TaskMenu';
 import { useColumnTask } from './hook';
 import { ColumnProps } from './types';
 import greyLines from '../../../../assets/images/gray_line.png';
 
 import { CardContainer } from '../../../controls/CardContainer';
-import { Box } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
+import { TaskPriorityIndicator } from '../../../controls/TaskPriorityIndicator';
+import { theme } from '../../../../theme';
+import NotesIcon from '@mui/icons-material/Notes';
 
 export const ColumnTask = memo(
   ({
@@ -20,7 +21,8 @@ export const ColumnTask = memo(
     taskIndex,
     taskText,
     boardId,
-    isPreview
+    isPreview,
+    taskPriority
   }: ColumnProps) => {
     const { ref, toggle, showPopup, togglePopup, hide } = useColumnTask({
       boardId,
@@ -28,7 +30,8 @@ export const ColumnTask = memo(
       taskId,
       taskName,
       taskIndex,
-      isPreview
+      isPreview,
+      taskPriority
     });
 
     return (
@@ -63,8 +66,23 @@ export const ColumnTask = memo(
 
         {!hide && (
           <CardContainer>
-            {taskName}
-            <CardMenuIcon className={'size_xs'} onClick={toggle} />
+            <TaskPriorityIndicator variant={taskPriority} />
+            <Typography sx={{ color: theme.palette.grey[900] }}>
+              {taskName}
+            </Typography>
+            <Box
+              sx={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-end'
+              }}
+            >
+              <IconButton>
+                <NotesIcon sx={{ color: theme.palette.grey[400] }} />
+              </IconButton>
+            </Box>
+
+            {/*<CardMenuIcon className={'size_xs'} onClick={toggle} />*/}
             {showPopup && (
               <CardMenu
                 taskText={taskText}

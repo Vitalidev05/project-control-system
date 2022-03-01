@@ -108,6 +108,7 @@ export const BoardColumn = memo(
               >
                 {targetBoardColumn?.columnTasks.map((task, index) => (
                   <ColumnTask
+                    taskPriority={task.priority}
                     taskDate={task.taskDate}
                     key={task.taskId}
                     taskName={task.taskName}

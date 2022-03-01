@@ -1,9 +1,12 @@
+import { Priority } from '../constants';
+
 export type CardDragItem = {
   boardId: string;
   cardIndex: number;
   cardId: string;
   columnId: string;
   taskName: string;
+  priority: Priority;
   type: 'CARD';
 };
 

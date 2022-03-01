@@ -1,3 +1,5 @@
+import { Priority } from '../../../../constants';
+
 export type ColumnProps = {
   taskText: string;
   taskDate?: Date;
@@ -7,6 +9,7 @@ export type ColumnProps = {
   columnId: string;
   isPreview?: boolean;
   boardId: string;
+  taskPriority: Priority;
 };
 
 export type HookProps = {
@@ -16,4 +19,5 @@ export type HookProps = {
   columnId: string;
   taskName: string;
   isPreview?: boolean;
+  taskPriority: Priority;
 };
