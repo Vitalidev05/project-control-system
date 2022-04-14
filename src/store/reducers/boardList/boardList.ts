@@ -3,25 +3,28 @@ import { nanoid } from 'nanoid';
 import { ActionType } from '../../../constants';
 import {
   ADD_BOARD,
-  ADD_COLUMN,
   ADD_CARD,
-  MOVE_COLUMN,
-  SET_DRAGGED_ITEM,
-  MOVE_CARD,
+  ADD_COLUMN,
+  CHANGE_CARD_DATE,
+  CHANGE_CARD_PRIORITY,
+  CHANGE_CARD_TITLE,
+  CHANGE_COLUMN_PRIORITY,
+  CHANGE_COLUMN_TITLE,
+  CHANGE_TEXT,
+  DELETE_BOARD,
   DELETE_CARD,
   DELETE_COLUMN,
-  DELETE_BOARD,
-  CHANGE_TEXT,
+  MOVE_CARD,
+  MOVE_COLUMN,
   SET_CURRENT_BOARD,
-  CHANGE_COLUMN_TITLE,
-  CHANGE_COLUMN_PRIORITY
+  SET_DRAGGED_ITEM
 } from '../../actions/actionTypes';
 
 import {
-  overrideItemAtIndex,
-  removeItemAtIndex,
+  insertItemAtIndex,
   moveItem,
-  insertItemAtIndex
+  overrideItemAtIndex,
+  removeItemAtIndex
 } from '../../../utils/arrayUtils';
 
 import { getInitialState, getNewBoard } from '../../../utils/getInitialState';
@@ -388,6 +391,166 @@ const boardList = (state = initialState, action: ActionType) => {
       return {
         ...state,
         boardList: removeItemAtIndex(state.boardList, targetBoardIndex)
+      };
+    }
+
+    case CHANGE_CARD_DATE: {
+      const { boardId, columnId, cardId, cardDate } = action.payload;
+      const targetBoardIndex = state.boardList.findIndex(
+        (x) => x.boardId === boardId
+      );
+
+      const targetBoard = state.boardList[targetBoardIndex];
+
+      const targetColumnIndex = targetBoard.boardColumns.findIndex(
+        (x: { columnId: string }) => x.columnId === columnId
+      );
+
+      const targetColumn = targetBoard.boardColumns[targetColumnIndex];
+
+      const targetCardIndex = targetColumn.columnCards.findIndex(
+        (x: { cardId: string }) => x.cardId === cardId
+      );
+
+      const targetCard = targetColumn.columnCards[targetCardIndex];
+
+      const updatedCard = {
+        ...targetCard,
+        cardDate
+      };
+
+      const updatedColumn = {
+        ...targetColumn,
+        columnCards: overrideItemAtIndex(
+          targetColumn.columnCards,
+          updatedCard,
+          targetCardIndex
+        )
+      };
+
+      const updatedBoard = {
+        ...targetBoard,
+        boardColumns: overrideItemAtIndex(
+          targetBoard.boardColumns,
+          updatedColumn,
+          targetColumnIndex
+        )
+      };
+
+      return {
+        ...state,
+        boardList: overrideItemAtIndex(
+          state.boardList,
+          updatedBoard,
+          targetBoardIndex
+        )
+      };
+    }
+
+    case CHANGE_CARD_PRIORITY: {
+      const { boardId, columnId, cardId, cardPriority } = action.payload;
+      const targetBoardIndex = state.boardList.findIndex(
+        (x) => x.boardId === boardId
+      );
+
+      const targetBoard = state.boardList[targetBoardIndex];
+
+      const targetColumnIndex = targetBoard.boardColumns.findIndex(
+        (x: { columnId: string }) => x.columnId === columnId
+      );
+
+      const targetColumn = targetBoard.boardColumns[targetColumnIndex];
+
+      const targetCardIndex = targetColumn.columnCards.findIndex(
+        (x: { cardId: string }) => x.cardId === cardId
+      );
+
+      const targetCard = targetColumn.columnCards[targetCardIndex];
+
+      const updatedCard = {
+        ...targetCard,
+        priority: cardPriority
+      };
+
+      const updatedColumn = {
+        ...targetColumn,
+        columnCards: overrideItemAtIndex(
+          targetColumn.columnCards,
+          updatedCard,
+          targetCardIndex
+        )
+      };
+
+      const updatedBoard = {
+        ...targetBoard,
+        boardColumns: overrideItemAtIndex(
+          targetBoard.boardColumns,
+          updatedColumn,
+          targetColumnIndex
+        )
+      };
+
+      return {
+        ...state,
+        boardList: overrideItemAtIndex(
+          state.boardList,
+          updatedBoard,
+          targetBoardIndex
+        )
+      };
+    }
+
+    case CHANGE_CARD_TITLE: {
+      const { boardId, columnId, cardId, cardTitle } = action.payload;
+
+      const targetBoardIndex = state.boardList.findIndex(
+        (x) => x.boardId === boardId
+      );
+
+      const targetBoard = state.boardList[targetBoardIndex];
+
+      const targetColumnIndex = targetBoard.boardColumns.findIndex(
+        (x: { columnId: string }) => x.columnId === columnId
+      );
+
+      const targetColumn = targetBoard.boardColumns[targetColumnIndex];
+
+      const targetCardIndex = targetColumn.columnCards.findIndex(
+        (x: { cardId: string }) => x.cardId === cardId
+      );
+
+      const targetCard = targetColumn.columnCards[targetCardIndex];
+
+      const updatedCard = {
+        ...targetCard,
+        cardName: cardTitle
+      };
+
+      const updatedColumn = {
+        ...targetColumn,
+        columnCards: overrideItemAtIndex(
+          targetColumn.columnCards,
+          updatedCard,
+          targetCardIndex
+        )
+      };
+
+      const updatedBoard = {
+        ...targetBoard,
+        boardColumns: overrideItemAtIndex(
+          targetBoard.boardColumns,
+          updatedColumn,
+          targetColumnIndex
+        )
+      };
+
+      return {
+        ...state,
+        boardList: overrideItemAtIndex(
+          state.boardList,
+          updatedBoard,
+          targetBoardIndex
+        )
       };
     }
 

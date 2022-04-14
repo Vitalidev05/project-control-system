@@ -95,6 +95,7 @@ export const ColumnCard = memo(
 
             {showPopup && (
               <CardMenu
+                cardPriority={cardPriority}
                 handleCloseModal={togglePopup}
                 openModal={showPopup}
                 cardText={cardText}

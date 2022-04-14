@@ -13,11 +13,19 @@ import {
   moveCard,
   setCurrentBoard,
   setDraggeditem,
-  toggleDisable
+  toggleDisable,
+  changeCardTitle,
+  changeCardPriority,
+  changeCardDate
 } from '../store/actions/actions';
 import { DragItem } from '../context/DragItem';
 import { useCallback } from 'react';
-import { Priority } from '../constants';
+import {
+  IChangeCardDate,
+  IChangeCardPriority,
+  IChangeCardTitle,
+  Priority
+} from '../constants';
 
 export const useActions = () => {
   const dispatch = useDispatch();
@@ -132,6 +140,21 @@ export const useActions = () => {
     [dispatch]
   );
 
+  const onChangeCardTitle: (data: IChangeCardTitle) => void = useCallback(
+    (data) => dispatch(changeCardTitle(data)),
+    [dispatch]
+  );
+
+  const onChangeCardPriority: (data: IChangeCardPriority) => void = useCallback(
+    (data) => dispatch(changeCardPriority(data)),
+    [dispatch]
+  );
+
+  const onChangeCardDate: (data: IChangeCardDate) => void = useCallback(
+    (data) => dispatch(changeCardDate(data)),
+    [dispatch]
+  );
+
   const onAddBoard: (boardName: string, boardColor: string) => void =
     useCallback(
       (boardName, boardColor) => dispatch(addBoard({ boardName, boardColor })),
@@ -144,6 +167,7 @@ export const useActions = () => {
   );
 
   return {
+    onChangeCardPriority,
     onAddColumn,
     onAddCard,
     onSetDraggedItem,
@@ -157,6 +181,8 @@ export const useActions = () => {
     onDeleteBoard,
     setCurrentBoardId,
     changeColumnName,
-    editColumnPriority
+    editColumnPriority,
+    onChangeCardTitle,
+    onChangeCardDate
   };
 };

@@ -16,7 +16,10 @@ import {
   TOGGLE_DISABLE,
   SET_CURRENT_BOARD,
   CHANGE_COLUMN_TITLE,
-  CHANGE_COLUMN_PRIORITY
+  CHANGE_COLUMN_PRIORITY,
+  CHANGE_CARD_TITLE,
+  CHANGE_CARD_PRIORITY,
+  CHANGE_CARD_DATE
 } from '../store/actions/actionTypes';
 
 import { DragItem } from '../context/DragItem';
@@ -107,6 +110,27 @@ interface IChangeText {
   text: string;
 }
 
+interface IChangeCardTitle {
+  boardId: string;
+  columnId: string;
+  cardId: string;
+  cardTitle: string;
+}
+
+interface IChangeCardPriority {
+  boardId: string;
+  columnId: string;
+  cardId: string;
+  cardPriority: Priority;
+}
+
+interface IChangeCardDate {
+  boardId: string;
+  columnId: string;
+  cardId: string;
+  cardDate: Date;
+}
+
 export type ChangeColumnTitleProps = {
   boardId: string;
   columnId: string;
@@ -170,6 +194,14 @@ type ActionType =
       };
     }
   | {
+      type: typeof CHANGE_CARD_PRIORITY;
+      payload: IChangeCardPriority;
+    }
+  | {
+      type: typeof CHANGE_CARD_DATE;
+      payload: IChangeCardDate;
+    }
+  | {
       type: typeof DELETE_CARD;
       payload: {
         boardId: string;
@@ -198,6 +230,10 @@ type ActionType =
         boardId: string;
         columnId: string;
       };
+    }
+  | {
+      type: typeof CHANGE_CARD_TITLE;
+      payload: IChangeCardTitle;
     }
   | {
       type: typeof MOVE_CARD;
@@ -245,6 +281,7 @@ const cardColors: string[] = ['blue', 'yellow', 'green', 'red'];
 
 export { cardColors };
 export type {
+  IChangeCardPriority,
   IState,
   IBoardListState,
   IBoardList,
@@ -263,5 +300,7 @@ export type {
   AuthActionType,
   IAddBoard,
   DisableActionType,
-  IDisable
+  IDisable,
+  IChangeCardTitle,
+  IChangeCardDate
 };

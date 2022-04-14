@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { style } from '../ColumnModal/style';
 import CloseIcon from '@mui/icons-material/Close';
+import { ChoosePriority } from '../../../controls/ChoosePriority';
 
 export const CardModal: React.FC<CardMenuProps> = memo(
   ({
@@ -23,14 +24,28 @@ export const CardModal: React.FC<CardMenuProps> = memo(
     closePopup,
     boardId,
     openModal,
-    handleCloseModal
+    handleCloseModal,
+    cardPriority
   }: CardMenuProps) => {
-    const { closePopupFunc, deleteCardFunc, changeTextFunc } = useCardModal({
+    const {
+      text,
+      closePopupFunc,
+      deleteCardFunc,
+      changeTextFunc,
+      submit,
+      changeTitleFunc,
+      title,
+      priority,
+      setPriority
+    } = useCardModal({
       cardId,
       cardText,
       columnId,
       boardId,
-      closePopup
+      closePopup,
+      cardPriority,
+      cardTitle: cardName,
+      cardDate
     });
 
     return (
@@ -60,17 +75,35 @@ export const CardModal: React.FC<CardMenuProps> = memo(
                   label="Card Title"
                   variant="outlined"
                   sx={{ width: '100%' }}
-                  value={cardName}
-                  // onChange={(e) => setColumnTitle(e.target.value)}
+                  value={title}
+                  onChange={changeTitleFunc}
                 />
               </Box>
+
+              <Box>
+                <TextField
+                  id="outlined-basic"
+                  label="Comment"
+                  variant="outlined"
+                  multiline
+                  sx={{ width: '100%' }}
+                  value={text}
+                  onChange={changeTextFunc}
+                />
+              </Box>
+              <ChoosePriority
+                activeItem={priority}
+                setActiveItem={setPriority}
+              />
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="h6">Date:</Typography>
+                <Box>{cardDate}</Box>
+              </Box>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button
-                variant="outlined"
-                color="success"
-                onClick={handleCloseModal}
-              >
+            <Box
+              sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}
+            >
+              <Button variant="outlined" color="success" onClick={submit}>
                 Save changes
               </Button>
               <Button variant="outlined" color="error" onClick={deleteCardFunc}>

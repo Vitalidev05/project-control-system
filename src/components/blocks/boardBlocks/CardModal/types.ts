@@ -1,3 +1,5 @@
+import { Priority } from '../../../../constants';
+
 export type CardMenuProps = {
   cardDate?: Date;
   cardName: string;
@@ -8,6 +10,7 @@ export type CardMenuProps = {
   boardId: string;
   handleCloseModal(): void;
   openModal: boolean;
+  cardPriority: Priority;
 };
 
 export type HookProps = {
@@ -16,4 +19,7 @@ export type HookProps = {
   columnId: string;
   closePopup: () => void;
   cardText: string;
+  cardTitle: string;
+  cardDate?: Date;
+  cardPriority: Priority;
 };

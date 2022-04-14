@@ -12,7 +12,10 @@ import {
   AddColumnPayload,
   AddCardPayload,
   ChangeColumnTitleProps,
-  ChangeColumnPriorityProps
+  ChangeColumnPriorityProps,
+  IChangeCardTitle,
+  IChangeCardPriority,
+  IChangeCardDate
 } from '../../constants';
 
 import {
@@ -37,7 +40,10 @@ import {
   TOGGLE_DISABLE,
   SET_CURRENT_BOARD,
   CHANGE_COLUMN_TITLE,
-  CHANGE_COLUMN_PRIORITY
+  CHANGE_COLUMN_PRIORITY,
+  CHANGE_CARD_TITLE,
+  CHANGE_CARD_PRIORITY,
+  CHANGE_CARD_DATE
 } from './actionTypes';
 
 function setCurrentBoard(str: string | null) {
@@ -151,6 +157,27 @@ function changeText(obj: IChangeText) {
   };
 }
 
+function changeCardTitle(obj: IChangeCardTitle) {
+  return {
+    type: CHANGE_CARD_TITLE,
+    payload: obj
+  };
+}
+
+function changeCardPriority(obj: IChangeCardPriority) {
+  return {
+    type: CHANGE_CARD_PRIORITY,
+    payload: obj
+  };
+}
+
+function changeCardDate(obj: IChangeCardDate) {
+  return {
+    type: CHANGE_CARD_DATE,
+    payload: obj
+  };
+}
+
 export const changeColumnTitle = (obj: ChangeColumnTitleProps) => {
   return {
     type: CHANGE_COLUMN_TITLE,
@@ -216,5 +243,8 @@ export {
   setDisableTrue,
   setDisableFalse,
   toggleDisable,
-  setCurrentBoard
+  setCurrentBoard,
+  changeCardTitle,
+  changeCardPriority,
+  changeCardDate
 };
