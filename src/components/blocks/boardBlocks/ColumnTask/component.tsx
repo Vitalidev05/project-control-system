@@ -83,16 +83,20 @@ export const ColumnTask = memo(
               }}
             >
               <IconButton>
-                <NotesIcon sx={{ color: theme.palette.grey[400] }} />
+                <NotesIcon
+                  onClick={toggle}
+                  sx={{ color: theme.palette.grey[400] }}
+                />
               </IconButton>
               <Box sx={{ py: 1, display: 'flex', gap: 0.5 }}>
                 <AddUser variant="new" />
               </Box>
             </Box>
 
-            {/*<CardMenuIcon className={'size_xs'} onClick={toggle} />*/}
             {showPopup && (
               <CardMenu
+                handleCloseModal={togglePopup}
+                openModal={showPopup}
                 taskText={taskText}
                 taskDate={taskDate}
                 taskName={taskName}

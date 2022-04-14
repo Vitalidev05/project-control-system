@@ -6,6 +6,8 @@ export type CardMenuProps = {
   taskId: string;
   columnId: string;
   boardId: string;
+  handleCloseModal(): void;
+  openModal: boolean;
 };
 
 export type HookProps = {

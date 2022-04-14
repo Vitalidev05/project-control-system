@@ -44,7 +44,7 @@ export const ColumnModal = memo(
               }}
             >
               <Typography variant="h6" component="h2">
-                Edit card
+                Edit column
               </Typography>
               <IconButton onClick={handleCloseModal}>
                 <CloseIcon sx={{ color: '#000' }} />
@@ -56,7 +56,7 @@ export const ColumnModal = memo(
               <Box>
                 <TextField
                   id="outlined-basic"
-                  label="Card Title"
+                  label="Column Title"
                   variant="outlined"
                   sx={{ width: '100%' }}
                   value={columnTitle}
@@ -72,7 +72,7 @@ export const ColumnModal = memo(
                   Save changes
                 </Button>
                 <Button variant="outlined" color="error" onClick={onDelete}>
-                  Delete Card
+                  Delete Column
                 </Button>
               </Box>
             </Box>
