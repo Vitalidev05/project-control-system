@@ -5,7 +5,7 @@ import { ManFooterIcon as ManFooterIcon2 } from './ManIcon2';
 import { RSSFooterIcon } from './RSSIcon';
 import { BaseIcon } from './BaseIcon';
 import { SearchHeaderIcon } from './Search';
-import { CardMenuIcon } from './TaskMenuIcon';
+import { CardMenuIcon } from './CardMenuIcon';
 import { WomanFooterIcon1 } from './WomanIcon1';
 import { WomanFooterIcon2 } from './WomanIcon2';
 

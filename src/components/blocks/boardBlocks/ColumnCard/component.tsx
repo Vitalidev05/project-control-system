@@ -1,38 +1,38 @@
 import React, { memo } from 'react';
 import { DragPreviewContainer } from '../../../../assets/stylesheets/styles';
 import '../../../icons/BaseIcon/BaseIcon.scss';
-import { TaskMenu as CardMenu } from '../TaskMenu';
-import { useColumnTask } from './hook';
+import { CardModal as CardMenu } from '../CardModal';
+import { useColumnCard } from './hook';
 import { ColumnProps } from './types';
 import greyLines from '../../../../assets/images/gray_line.png';
 
 import { CardContainer } from '../../../controls/CardContainer';
 import { Box, IconButton, Typography } from '@mui/material';
-import { TaskPriorityIndicator } from '../../../controls/TaskPriorityIndicator';
+import { CardPriorityIndicator } from '../../../controls/CardPriorityIndicator';
 import { theme } from '../../../../theme';
 import NotesIcon from '@mui/icons-material/Notes';
 import { AddUser } from '../../../controls/AddUser';
 
-export const ColumnTask = memo(
+export const ColumnCard = memo(
   ({
     columnId,
-    taskName,
-    taskId,
-    taskDate,
-    taskIndex,
-    taskText,
+    cardName,
+    cardId,
+    cardDate,
+    cardIndex,
+    cardText,
     boardId,
     isPreview,
-    taskPriority
+    cardPriority
   }: ColumnProps) => {
-    const { ref, toggle, showPopup, togglePopup, hide } = useColumnTask({
+    const { ref, toggle, showPopup, togglePopup, hide } = useColumnCard({
       boardId,
       columnId,
-      taskId,
-      taskName,
-      taskIndex,
+      cardId,
+      cardName,
+      cardIndex,
       isPreview,
-      taskPriority
+      cardPriority
     });
 
     return (
@@ -68,10 +68,10 @@ export const ColumnTask = memo(
         {!hide && (
           <CardContainer>
             <Box sx={{ pl: 1 }}>
-              <TaskPriorityIndicator variant={taskPriority} />
+              <CardPriorityIndicator variant={cardPriority} />
             </Box>
             <Typography sx={{ color: theme.palette.grey[900], pl: 1 }}>
-              {taskName}
+              {cardName}
             </Typography>
             <Box
               sx={{
@@ -97,11 +97,11 @@ export const ColumnTask = memo(
               <CardMenu
                 handleCloseModal={togglePopup}
                 openModal={showPopup}
-                taskText={taskText}
-                taskDate={taskDate}
-                taskName={taskName}
+                cardText={cardText}
+                cardDate={cardDate}
+                cardName={cardName}
                 closePopup={togglePopup}
-                taskId={taskId}
+                cardId={cardId}
                 columnId={columnId}
                 boardId={boardId}
               />

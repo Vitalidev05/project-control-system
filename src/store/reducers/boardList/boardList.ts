@@ -4,11 +4,11 @@ import { ActionType } from '../../../constants';
 import {
   ADD_BOARD,
   ADD_COLUMN,
-  ADD_TASK,
+  ADD_CARD,
   MOVE_COLUMN,
   SET_DRAGGED_ITEM,
-  MOVE_TASK,
-  DELETE_TASK,
+  MOVE_CARD,
+  DELETE_CARD,
   DELETE_COLUMN,
   DELETE_BOARD,
   CHANGE_TEXT,
@@ -137,7 +137,7 @@ const boardList = (state = initialState, action: ActionType) => {
             priority: action.payload?.priority || 'none',
             columnId: nanoid(),
             columnName: action.payload.text,
-            columnTasks: []
+            columnCards: []
           }
         ]
       };
@@ -152,7 +152,7 @@ const boardList = (state = initialState, action: ActionType) => {
       };
     }
 
-    case ADD_TASK: {
+    case ADD_CARD: {
       const targetBoardIndex = state.boardList.findIndex(
         (x) => x.boardId === action.payload.boardId
       );
@@ -166,16 +166,16 @@ const boardList = (state = initialState, action: ActionType) => {
           value.columnId === action.payload.columnId
       )[0];
 
-      const updatedTaskList = {
+      const updatedCardList = {
         ...targetColumn,
-        columnTasks: [
-          ...targetColumn.columnTasks,
+        columnCards: [
+          ...targetColumn.columnCards,
           {
             priority: action.payload?.priority || 'none',
-            taskId: nanoid(),
-            taskName: action.payload.text,
-            taskText: '',
-            taskDate: new Date()
+            cardId: nanoid(),
+            cardName: action.payload.text,
+            cardText: '',
+            cardDate: new Date()
           }
         ]
       };
@@ -184,7 +184,7 @@ const boardList = (state = initialState, action: ActionType) => {
         ...targetBoard,
         boardColumns: overrideItemAtIndex(
           targetBoard.boardColumns,
-          updatedTaskList,
+          updatedCardList,
           targetColumnIndex
         )
       };
@@ -221,7 +221,7 @@ const boardList = (state = initialState, action: ActionType) => {
       };
     }
 
-    case MOVE_TASK: {
+    case MOVE_CARD: {
       const { dragIndex, hoverIndex, sourceColumn, targetColumn, boardId } =
         action.payload;
       const targetBoardIndex = state.boardList.findIndex(
@@ -239,11 +239,11 @@ const boardList = (state = initialState, action: ActionType) => {
 
       const sourceList = targetBoard.boardColumns[sourceColumnIndex];
 
-      const task = sourceList.columnTasks[dragIndex];
+      const card = sourceList.columnCards[dragIndex];
 
       const updatedSourceColumn = {
         ...sourceList,
-        columnTasks: removeItemAtIndex(sourceList.columnTasks, dragIndex)
+        columnCards: removeItemAtIndex(sourceList.columnCards, dragIndex)
       };
 
       const stateWithUpdatedSourceList = {
@@ -260,7 +260,7 @@ const boardList = (state = initialState, action: ActionType) => {
 
       const updatedTargetList = {
         ...targetList,
-        columnTasks: insertItemAtIndex(targetList.columnTasks, task, hoverIndex)
+        columnCards: insertItemAtIndex(targetList.columnCards, card, hoverIndex)
       };
 
       const updateBoard = {
@@ -304,8 +304,8 @@ const boardList = (state = initialState, action: ActionType) => {
       };
     }
 
-    case DELETE_TASK: {
-      const { boardId, columnId, taskId } = action.payload;
+    case DELETE_CARD: {
+      const { boardId, columnId, cardId } = action.payload;
 
       const targetBoardIndex = state.boardList.findIndex(
         (x) => x.boardId === boardId
@@ -319,15 +319,15 @@ const boardList = (state = initialState, action: ActionType) => {
 
       const targetColumn = targetBoard.boardColumns[targetColumnIndex];
 
-      const targetTaskIndex = targetColumn.columnTasks.findIndex(
-        (x: { taskId: string }) => x.taskId === taskId
+      const targetCardIndex = targetColumn.columnCards.findIndex(
+        (x: { cardId: string }) => x.cardId === cardId
       );
 
       const updatedColumn = {
         ...targetColumn,
-        columnTasks: removeItemAtIndex(
-          targetColumn.columnTasks,
-          targetTaskIndex
+        columnCards: removeItemAtIndex(
+          targetColumn.columnCards,
+          targetCardIndex
         )
       };
 
@@ -392,7 +392,7 @@ const boardList = (state = initialState, action: ActionType) => {
     }
 
     case CHANGE_TEXT: {
-      const { boardId, taskId, columnId, text } = action.payload;
+      const { boardId, cardId, columnId, text } = action.payload;
 
       const targetBoardIndex = state.boardList.findIndex(
         (x) => x.boardId === boardId
@@ -406,23 +406,23 @@ const boardList = (state = initialState, action: ActionType) => {
 
       const targetColumn = targetBoard.boardColumns[targetColumnIndex];
 
-      const targetTaskIndex = targetColumn.columnTasks.findIndex(
-        (x: { taskId: string }) => x.taskId === taskId
+      const targetCardIndex = targetColumn.columnCards.findIndex(
+        (x: { cardId: string }) => x.cardId === cardId
       );
 
-      const targetTask = targetColumn.columnTasks[targetTaskIndex];
+      const targetCard = targetColumn.columnCards[targetCardIndex];
 
-      const updatedTask = {
-        ...targetTask,
-        taskText: text
+      const updatedCard = {
+        ...targetCard,
+        cardText: text
       };
 
       const updatedColumn = {
         ...targetColumn,
-        columnTasks: overrideItemAtIndex(
-          targetColumn.columnTasks,
-          updatedTask,
-          targetTaskIndex
+        columnCards: overrideItemAtIndex(
+          targetColumn.columnCards,
+          updatedCard,
+          targetCardIndex
         )
       };
 

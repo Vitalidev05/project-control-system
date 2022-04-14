@@ -3,22 +3,22 @@ import { useActions } from '../../../../utils/useActions';
 
 import { HookProps } from './types';
 
-export const useTaskMenu = ({
-  taskId,
+export const useCardModal = ({
+  cardId,
   boardId,
   columnId,
-  taskText,
+  cardText,
   closePopup
 }: HookProps) => {
   const { onChangeText, onSetToggle, onDeleteCard } = useActions();
 
-  const [text, setText] = useState(taskText);
+  const [text, setText] = useState(cardText);
 
   const deleteCardFunc = useCallback(() => {
-    onDeleteCard(taskId, boardId, columnId);
+    onDeleteCard(cardId, boardId, columnId);
     closePopup();
     onSetToggle();
-  }, [boardId, closePopup, columnId, onDeleteCard, onSetToggle, taskId]);
+  }, [boardId, closePopup, columnId, onDeleteCard, onSetToggle, cardId]);
 
   const changeTextFunc = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,10 +28,10 @@ export const useTaskMenu = ({
   );
 
   const closePopupFunc = useCallback(() => {
-    onChangeText(taskId, boardId, columnId, text);
+    onChangeText(cardId, boardId, columnId, text);
     closePopup();
     onSetToggle();
-  }, [boardId, closePopup, columnId, onChangeText, onSetToggle, taskId, text]);
+  }, [boardId, closePopup, columnId, onChangeText, onSetToggle, cardId, text]);
 
   return {
     changeTextFunc,

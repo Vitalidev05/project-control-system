@@ -2,15 +2,15 @@ import { useDispatch } from 'react-redux';
 import {
   addBoard,
   addColumn,
-  addTask,
+  addCard,
   changeColumnPriority,
   changeColumnTitle,
   changeText,
   deleteBoard,
   deleteColumn,
-  deleteTask,
+  deleteCard,
   moveColumn,
-  moveTask,
+  moveCard,
   setCurrentBoard,
   setDraggeditem,
   toggleDisable
@@ -57,14 +57,14 @@ export const useActions = () => {
     [dispatch]
   );
 
-  const onAddTask: (
+  const onAddCard: (
     str: string,
     boardId: string,
     columnId: string,
     priority?: Priority
   ) => void = useCallback(
     (str, boardId, columnId, priority) =>
-      dispatch(addTask({ text: str, boardId, columnId, priority })),
+      dispatch(addCard({ text: str, boardId, columnId, priority })),
     [dispatch]
   );
 
@@ -92,7 +92,7 @@ export const useActions = () => {
     [dispatch]
   );
 
-  const onMoveTask: (
+  const onMoveCard: (
     dragIndex: number,
     hoverIndex: number,
     sourceColumn: string,
@@ -101,7 +101,7 @@ export const useActions = () => {
   ) => void = useCallback(
     (dragIndex, hoverIndex, sourceColumn, targetColumn, boardId) =>
       dispatch(
-        moveTask({ dragIndex, hoverIndex, sourceColumn, targetColumn, boardId })
+        moveCard({ dragIndex, hoverIndex, sourceColumn, targetColumn, boardId })
       ),
     [dispatch]
   );
@@ -112,23 +112,23 @@ export const useActions = () => {
   );
 
   const onDeleteCard: (
-    taskId: string,
+    cardId: string,
     boardId: string,
     columnId: string
   ) => void = useCallback(
-    (taskId, boardId, columnId) =>
-      dispatch(deleteTask({ taskId, boardId, columnId })),
+    (cardId, boardId, columnId) =>
+      dispatch(deleteCard({ cardId, boardId, columnId })),
     [dispatch]
   );
 
   const onChangeText: (
-    taskId: string,
+    cardId: string,
     boardId: string,
     columnId: string,
     text: string
   ) => void = useCallback(
-    (taskId, boardId, columnId, text) =>
-      dispatch(changeText({ taskId, boardId, columnId, text })),
+    (cardId, boardId, columnId, text) =>
+      dispatch(changeText({ cardId, boardId, columnId, text })),
     [dispatch]
   );
 
@@ -145,10 +145,10 @@ export const useActions = () => {
 
   return {
     onAddColumn,
-    onAddTask,
+    onAddCard,
     onSetDraggedItem,
     onMoveColumn,
-    onMoveTask,
+    onMoveCard,
     onDeleteColumn,
     onSetToggle,
     onDeleteCard,

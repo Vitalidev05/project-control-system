@@ -1,0 +1,1 @@
+export { CardPriorityIndicator } from './component';

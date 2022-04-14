@@ -1,23 +1,23 @@
 import { Priority } from '../../../../constants';
 
 export type ColumnProps = {
-  taskText: string;
-  taskDate?: Date;
-  taskName: string;
-  taskIndex: number;
-  taskId: string;
+  cardText: string;
+  cardDate?: Date;
+  cardName: string;
+  cardIndex: number;
+  cardId: string;
   columnId: string;
   isPreview?: boolean;
   boardId: string;
-  taskPriority: Priority;
+  cardPriority: Priority;
 };
 
 export type HookProps = {
   boardId: string;
-  taskId: string;
-  taskIndex: number;
+  cardId: string;
+  cardIndex: number;
   columnId: string;
-  taskName: string;
+  cardName: string;
   isPreview?: boolean;
-  taskPriority: Priority;
+  cardPriority: Priority;
 };

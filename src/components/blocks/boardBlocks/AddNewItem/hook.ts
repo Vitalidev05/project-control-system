@@ -10,7 +10,7 @@ export const useAddNewItem = ({
   boardId: string;
   columnId?: string;
 }) => {
-  const { onAddColumn, onAddTask } = useActions();
+  const { onAddColumn, onAddCard } = useActions();
 
   const [showForm, setShowForm] = useState(false);
   const onAdd = useCallback(
@@ -18,11 +18,11 @@ export const useAddNewItem = ({
       {
         functionName === 'addColumn'
           ? onAddColumn(itemText, boardId)
-          : onAddTask(itemText, boardId, columnId || '1');
+          : onAddCard(itemText, boardId, columnId || '1');
       }
       setShowForm(false);
     },
-    [boardId, columnId, functionName, onAddColumn, onAddTask]
+    [boardId, columnId, functionName, onAddColumn, onAddCard]
   );
 
   const handleClose = useCallback(() => setShowForm(false), []);

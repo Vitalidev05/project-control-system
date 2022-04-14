@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { ColumnContainer } from '../../../../assets/stylesheets/styles';
 import { AddNewItem } from '../AddNewItem';
-import { ColumnTask } from '../ColumnTask';
+import { ColumnCard } from '../ColumnCard';
 import '../../../icons/BaseIcon/BaseIcon.scss';
 import { useColumn } from './hook';
 import { ColumnProps } from './types';
@@ -83,7 +83,7 @@ export const BoardColumn = memo(
                       }
                     }}
                   >
-                    {options.map(({ name, action }) => (
+                    {options?.map(({ name, action }) => (
                       <MenuItem
                         key={name}
                         onClick={() => {
@@ -106,16 +106,16 @@ export const BoardColumn = memo(
                   overflowY: 'auto'
                 }}
               >
-                {targetBoardColumn?.columnTasks.map((task, index) => (
-                  <ColumnTask
-                    taskPriority={task.priority}
-                    taskDate={task.taskDate}
-                    key={task.taskId}
-                    taskName={task.taskName}
-                    taskText={task.taskText}
-                    taskIndex={index}
+                {targetBoardColumn?.columnCards?.map((card, index) => (
+                  <ColumnCard
+                    cardPriority={card.priority}
+                    cardDate={card.cardDate}
+                    key={card.cardId}
+                    cardName={card.cardName}
+                    cardText={card.cardText}
+                    cardIndex={index}
                     columnId={targetBoardColumn?.columnId}
-                    taskId={task.taskId}
+                    cardId={card.cardId}
                     boardId={boardId}
                   />
                 ))}
@@ -124,7 +124,7 @@ export const BoardColumn = memo(
               <Box sx={{ my: 2 }}>
                 <AddNewItem
                   toggleButtonText="Add card"
-                  functionName="addTask"
+                  functionName="addCard"
                   columnId={columnId}
                   boardId={boardId}
                   dark

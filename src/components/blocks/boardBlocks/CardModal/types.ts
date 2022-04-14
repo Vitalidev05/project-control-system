@@ -1,9 +1,9 @@
 export type CardMenuProps = {
-  taskDate?: Date;
-  taskName: string;
-  taskText: string;
+  cardDate?: Date;
+  cardName: string;
+  cardText: string;
   closePopup: () => void;
-  taskId: string;
+  cardId: string;
   columnId: string;
   boardId: string;
   handleCloseModal(): void;
@@ -11,9 +11,9 @@ export type CardMenuProps = {
 };
 
 export type HookProps = {
-  taskId: string;
+  cardId: string;
   boardId: string;
   columnId: string;
   closePopup: () => void;
-  taskText: string;
+  cardText: string;
 };

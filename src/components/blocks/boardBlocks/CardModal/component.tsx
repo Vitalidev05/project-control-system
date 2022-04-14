@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
-import './TaskMenu.scss';
-import { useTaskMenu } from './hook';
+import { useCardModal } from './hook';
 import { CardMenuProps } from './types';
 import {
   Box,
@@ -14,21 +13,21 @@ import {
 import { style } from '../ColumnModal/style';
 import CloseIcon from '@mui/icons-material/Close';
 
-export const TaskMenu: React.FC<CardMenuProps> = memo(
+export const CardModal: React.FC<CardMenuProps> = memo(
   ({
-    taskId,
-    taskText,
+    cardId,
+    cardText,
     columnId,
-    taskName,
-    taskDate,
+    cardName,
+    cardDate,
     closePopup,
     boardId,
     openModal,
     handleCloseModal
   }: CardMenuProps) => {
-    const { closePopupFunc, deleteCardFunc, changeTextFunc } = useTaskMenu({
-      taskId,
-      taskText,
+    const { closePopupFunc, deleteCardFunc, changeTextFunc } = useCardModal({
+      cardId,
+      cardText,
       columnId,
       boardId,
       closePopup
@@ -61,7 +60,7 @@ export const TaskMenu: React.FC<CardMenuProps> = memo(
                   label="Card Title"
                   variant="outlined"
                   sx={{ width: '100%' }}
-                  value={taskName}
+                  value={cardName}
                   // onChange={(e) => setColumnTitle(e.target.value)}
                 />
               </Box>

@@ -10,16 +10,16 @@ import { HoverDrag } from '../../../../types/shared';
 import { selectDraggedItem } from '../../../../store/reducers/boardList/selectors';
 import { selectDnd } from '../../../../store/reducers/dissableDnd/selectors';
 
-export const useColumnTask = ({
+export const useColumnCard = ({
   boardId,
-  taskId,
-  taskIndex,
+  cardId,
+  cardIndex,
   columnId,
-  taskName,
+  cardName,
   isPreview,
-  taskPriority
+  cardPriority
 }: HookProps) => {
-  const { onMoveTask, onSetToggle, onSetDraggedItem } = useActions();
+  const { onMoveCard, onSetToggle, onSetDraggedItem } = useActions();
   const draggedItem = useSelector(selectDraggedItem);
 
   const isDisable = useSelector(selectDnd);
@@ -44,13 +44,13 @@ export const useColumnTask = ({
         const newItem: DragItem | undefined = item.payload.Drag;
 
         if (newItem?.type === 'CARD') {
-          if (newItem.cardId !== taskId) {
+          if (newItem.cardId !== cardId) {
             const dragIndex = newItem.cardIndex;
-            const hoverIndex = taskIndex;
+            const hoverIndex = cardIndex;
             const sourceColumn = newItem.columnId;
             const targetColumn = columnId;
 
-            onMoveTask(
+            onMoveCard(
               dragIndex,
               hoverIndex,
               sourceColumn,
@@ -63,22 +63,22 @@ export const useColumnTask = ({
         }
       }
     }),
-    [boardId, columnId, onMoveTask, taskId, taskIndex]
+    [boardId, columnId, onMoveCard, cardId, cardIndex]
   );
 
   const [, drop] = useDrop(dropConfig);
 
   const item: DragItem = useMemo(
     () => ({
-      priority: taskPriority,
+      priority: cardPriority,
       boardId: boardId,
-      cardIndex: taskIndex,
-      cardId: taskId,
+      cardIndex: cardIndex,
+      cardId: cardId,
       columnId: columnId,
-      taskName: taskName,
+      cardName: cardName,
       type: 'CARD'
     }),
-    [boardId, columnId, taskId, taskIndex, taskName, taskPriority]
+    [boardId, columnId, cardId, cardIndex, cardName, cardPriority]
   );
 
   const dragConfig = useMemo(
@@ -101,8 +101,8 @@ export const useColumnTask = ({
   drag(drop(ref));
 
   const hide = useMemo(
-    () => isHidden(isPreview, draggedItem, 'CARD', taskId),
-    [draggedItem, isPreview, taskId]
+    () => isHidden(isPreview, draggedItem, 'CARD', cardId),
+    [draggedItem, isPreview, cardId]
   );
 
   return {

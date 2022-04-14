@@ -5,7 +5,7 @@ export type CardDragItem = {
   cardIndex: number;
   cardId: string;
   columnId: string;
-  taskName: string;
+  cardName: string;
   priority: Priority;
   type: 'CARD';
 };

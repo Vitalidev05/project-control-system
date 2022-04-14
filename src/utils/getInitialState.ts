@@ -22,13 +22,13 @@ const getInitialState = (name = 'Board'): InitialState => {
             priority: 'none',
             columnId: nanoid(),
             columnName: 'To Do',
-            columnTasks: [
+            columnCards: [
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'learn typescript',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'learn typescript',
+                cardText: '',
+                cardDate: date
               }
             ]
           },
@@ -36,20 +36,20 @@ const getInitialState = (name = 'Board'): InitialState => {
             priority: 'low',
             columnId: nanoid(),
             columnName: 'Testing',
-            columnTasks: [
+            columnCards: [
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'write tests',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'write tests',
+                cardText: '',
+                cardDate: date
               },
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'Never gonna give you up',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'Never gonna give you up',
+                cardText: '',
+                cardDate: date
               }
             ]
           },
@@ -57,27 +57,27 @@ const getInitialState = (name = 'Board'): InitialState => {
             priority: 'none',
             columnId: nanoid(),
             columnName: 'Complited',
-            columnTasks: [
+            columnCards: [
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'Never gonna get you down',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'Never gonna get you down',
+                cardText: '',
+                cardDate: date
               },
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'Never gonna run around',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'Never gonna run around',
+                cardText: '',
+                cardDate: date
               },
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'And hurt you',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'And hurt you',
+                cardText: '',
+                cardDate: date
               }
             ]
           }
@@ -93,13 +93,13 @@ const getInitialState = (name = 'Board'): InitialState => {
             priority: 'low',
             columnId: nanoid(),
             columnName: 'To Do',
-            columnTasks: [
+            columnCards: [
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'learn typescript',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'learn typescript',
+                cardText: '',
+                cardDate: date
               }
             ]
           },
@@ -107,20 +107,20 @@ const getInitialState = (name = 'Board'): InitialState => {
             columnId: nanoid(),
             columnName: 'Testing',
             priority: 'medium',
-            columnTasks: [
+            columnCards: [
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'write tests',
-                taskText: 'Task description',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'write tests',
+                cardText: 'Card description',
+                cardDate: date
               },
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'Never gonna give you up',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'Never gonna give you up',
+                cardText: '',
+                cardDate: date
               }
             ]
           },
@@ -128,13 +128,13 @@ const getInitialState = (name = 'Board'): InitialState => {
             columnId: nanoid(),
             columnName: 'Complited',
             priority: 'high',
-            columnTasks: [
+            columnCards: [
               {
                 priority: 'none',
-                taskId: nanoid(),
-                taskName: 'Never gonna get you down',
-                taskText: '',
-                taskDate: date
+                cardId: nanoid(),
+                cardName: 'Never gonna get you down',
+                cardText: '',
+                cardDate: date
               }
             ]
           }
@@ -158,13 +158,13 @@ const getNewBoard: (
       priority: 'none',
       columnId: nanoid(),
       columnName: 'To Do',
-      columnTasks: [
+      columnCards: [
         {
           priority: 'none',
-          taskId: nanoid(),
-          taskName: 'learn typescript',
-          taskText: '',
-          taskDate: new Date()
+          cardId: nanoid(),
+          cardName: 'learn typescript',
+          cardText: '',
+          cardDate: new Date()
         }
       ]
     }

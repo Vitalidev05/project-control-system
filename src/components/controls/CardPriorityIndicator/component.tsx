@@ -3,7 +3,7 @@ import { Props } from './types';
 import { theme } from '../../../theme';
 import { Box } from '@mui/material';
 
-export const TaskPriorityIndicator = memo(({ variant }: Props) => {
+export const CardPriorityIndicator = memo(({ variant }: Props) => {
   const bgcolor = useMemo(() => {
     if (variant === 'low') return theme.palette.primary.main;
     if (variant === 'medium') return theme.palette.info.main;

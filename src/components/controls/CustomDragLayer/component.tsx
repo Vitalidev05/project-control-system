@@ -3,7 +3,7 @@ import { XYCoord, useDragLayer } from 'react-dnd';
 
 import { CustomDragLayerContainer } from '../../../assets/stylesheets/styles';
 import { BoardColumn as Column } from '../../blocks/boardBlocks/Column';
-import { ColumnTask as Card } from '../../blocks/boardBlocks/ColumnTask';
+import { ColumnCard } from '../../blocks/boardBlocks/ColumnCard';
 import { DragItem } from '../../../context/DragItem';
 
 function getItemStyles(currentOffset: XYCoord | null) {
@@ -47,14 +47,14 @@ export const CustomDragLayer: React.FC = memo(() => {
             boardId={itemDrag.boardId}
           />
         ) : (
-          <Card
-            taskPriority={itemDrag.priority}
-            taskText=""
+          <ColumnCard
+            cardPriority={itemDrag.priority}
+            cardText=""
             columnId={itemDrag.columnId}
             isPreview
-            taskIndex={0}
-            taskId={itemDrag.cardId}
-            taskName={itemDrag.taskName}
+            cardIndex={0}
+            cardId={itemDrag.cardId}
+            cardName={itemDrag.cardName}
             boardId={itemDrag.boardId}
           />
         )}

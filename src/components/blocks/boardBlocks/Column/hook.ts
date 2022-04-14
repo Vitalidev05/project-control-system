@@ -30,7 +30,7 @@ export const useColumn = ({
 }: HookProps) => {
   const {
     onMoveColumn,
-    onMoveTask,
+    onMoveCard,
     onDeleteColumn,
     onSetDraggedItem,
     changeColumnName,
@@ -95,7 +95,7 @@ export const useColumn = ({
             return;
           }
 
-          onMoveTask(
+          onMoveCard(
             dragIndex,
             hoverIndex,
             sourceColumn,
@@ -108,7 +108,7 @@ export const useColumn = ({
         }
       }
     }),
-    [boardId, columnId, index, onMoveColumn, onMoveTask]
+    [boardId, columnId, index, onMoveColumn, onMoveCard]
   );
 
   const [, drop] = useDrop(dropConfig);

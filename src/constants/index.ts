@@ -1,11 +1,11 @@
 import {
   ADD_BOARD,
   MOVE_COLUMN,
-  ADD_TASK,
+  ADD_CARD,
   ADD_COLUMN,
   SET_DRAGGED_ITEM,
-  MOVE_TASK,
-  DELETE_TASK,
+  MOVE_CARD,
+  DELETE_CARD,
   DELETE_COLUMN,
   DELETE_BOARD,
   CHANGE_TEXT,
@@ -43,15 +43,15 @@ interface IColumns {
   priority: Priority;
   columnId: string;
   columnName: string;
-  columnTasks: IBoardTasks[];
+  columnCards: IBoardCards[];
 }
 
-interface IBoardTasks {
-  taskId: string;
-  taskName: string;
-  taskText: string;
+interface IBoardCards {
+  cardId: string;
+  cardName: string;
+  cardText: string;
   priority: Priority;
-  taskDate: Date;
+  cardDate: Date;
 }
 
 export type AddColumnPayload = {
@@ -60,7 +60,7 @@ export type AddColumnPayload = {
   priority?: Priority;
 };
 
-export type AddTaskPayload = {
+export type AddCardPayload = {
   text: string;
   boardId: string;
   columnId: string;
@@ -73,7 +73,7 @@ interface IMoveColumn {
   boardId: string;
 }
 
-interface IMoveTask {
+interface IMoveCard {
   dragIndex: number;
   hoverIndex: number;
   sourceColumn: string;
@@ -85,10 +85,10 @@ interface ISetDraggedItem {
   boardId: string;
 }
 
-interface IDeleteTask {
+interface IDeleteCard {
   boardId: string;
   columnId: string;
-  taskId: string;
+  cardId: string;
 }
 
 interface IDeleteColumn {
@@ -103,7 +103,7 @@ interface IDeleteBoard {
 interface IChangeText {
   boardId: string;
   columnId: string;
-  taskId: string;
+  cardId: string;
   text: string;
 }
 
@@ -146,7 +146,7 @@ type ActionType =
       payload: { text: string; boardId: string; priority?: Priority };
     }
   | {
-      type: typeof ADD_TASK;
+      type: typeof ADD_CARD;
       payload: {
         text: string;
         boardId: string;
@@ -170,11 +170,11 @@ type ActionType =
       };
     }
   | {
-      type: typeof DELETE_TASK;
+      type: typeof DELETE_CARD;
       payload: {
         boardId: string;
         columnId: string;
-        taskId: string;
+        cardId: string;
       };
     }
   | {
@@ -194,13 +194,13 @@ type ActionType =
       type: typeof CHANGE_TEXT;
       payload: {
         text: string;
-        taskId: string;
+        cardId: string;
         boardId: string;
         columnId: string;
       };
     }
   | {
-      type: typeof MOVE_TASK;
+      type: typeof MOVE_CARD;
       payload: {
         boardId: string;
         dragIndex: number;
@@ -249,14 +249,14 @@ export type {
   IBoardListState,
   IBoardList,
   IColumns,
-  IBoardTasks,
+  IBoardCards,
   ActionType,
   IMoveColumn,
-  IMoveTask,
+  IMoveCard,
   ISetDraggedItem,
   IMenu,
   IMenuToggle,
-  IDeleteTask,
+  IDeleteCard,
   IDeleteColumn,
   IDeleteBoard,
   IChangeText,

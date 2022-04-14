@@ -2,15 +2,15 @@ import { Dispatch } from 'react';
 
 import {
   IMoveColumn,
-  IMoveTask,
+  IMoveCard,
   ISetDraggedItem,
-  IDeleteTask,
+  IDeleteCard,
   IDeleteColumn,
   IDeleteBoard,
   IChangeText,
   IAddBoard,
   AddColumnPayload,
-  AddTaskPayload,
+  AddCardPayload,
   ChangeColumnTitleProps,
   ChangeColumnPriorityProps
 } from '../../constants';
@@ -22,11 +22,11 @@ import {
   ADD2,
   ADD_BOARD,
   ADD_COLUMN,
-  ADD_TASK,
+  ADD_CARD,
   MOVE_COLUMN,
-  MOVE_TASK,
+  MOVE_CARD,
   SET_DRAGGED_ITEM,
-  DELETE_TASK,
+  DELETE_CARD,
   DELETE_COLUMN,
   DELETE_BOARD,
   CHANGE_TEXT,
@@ -95,9 +95,9 @@ function addColumn(obj: AddColumnPayload) {
   };
 }
 
-function addTask(obj: AddTaskPayload) {
+function addCard(obj: AddCardPayload) {
   return {
-    type: ADD_TASK,
+    type: ADD_CARD,
     payload: obj
   };
 }
@@ -109,9 +109,9 @@ function moveColumn(obj: IMoveColumn) {
   };
 }
 
-function moveTask(obj: IMoveTask) {
+function moveCard(obj: IMoveCard) {
   return {
-    type: MOVE_TASK,
+    type: MOVE_CARD,
     payload: obj
   };
 }
@@ -123,9 +123,9 @@ function setDraggeditem(obj: ISetDraggedItem) {
   };
 }
 
-function deleteTask(obj: IDeleteTask) {
+function deleteCard(obj: IDeleteCard) {
   return {
-    type: DELETE_TASK,
+    type: DELETE_CARD,
     payload: obj
   };
 }
@@ -203,11 +203,11 @@ export {
   asyncAdd,
   addBoard,
   addColumn,
-  addTask,
+  addCard,
   moveColumn,
-  moveTask,
+  moveCard,
   setDraggeditem,
-  deleteTask,
+  deleteCard,
   deleteColumn,
   deleteBoard,
   changeText,
