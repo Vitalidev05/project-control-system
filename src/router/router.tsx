@@ -20,6 +20,7 @@ export const AppRouter = () => {
           path={RouteConst.HOME}
           element={
             <ProjectContainer>
+              <Route path={RouteConst.MAIN} element={<BoardList />} />
               <Route path={RouteConst.BOARD_LIST} element={<BoardList />} />
               <Route path={RouteConst.BOARD} element={<Board />} />
             </ProjectContainer>
