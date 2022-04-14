@@ -19,6 +19,8 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import { theme } from '../../../theme';
 import { styled, alpha } from '@mui/material/styles';
 import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
+import { useNavigate } from 'react-router-dom';
+import { RouteConst } from '../../../router/routeConst';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -66,6 +68,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const Header = memo(() => {
   const { open, node, setOpen } = useHeader();
+  const navigate = useNavigate();
+  const toBoardList = () => navigate(RouteConst.BOARD_LIST);
 
   return (
     <Box
@@ -85,6 +89,7 @@ export const Header = memo(() => {
                 alignItems: 'center'
               }}
               color="warning"
+              onClick={toBoardList}
             >
               <GridViewIcon
                 sx={{ color: theme.palette.grey[300], fontSize: 26 }}
